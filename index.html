@@ -1,0 +1,2223 @@
+!DOCTYPE html
+html lang=ru
+head
+meta charset=UTF-8
+meta name=viewport content=width=device-width, initial-scale=1.0
+titleCHEKUSHKA DROPtitle
+style
+{margin0;padding0;box-sizingborder-box}
+root{--bg#0a0812;--surface#141024;--surface2#1c1533;--border#352c55;--text#e6e2f5;--text-dim#948ab8;--common#b0b8c8;--rare#ab47bc;--epic#ff7043;--mythic#e935ff;--legendary#ffd740;--money#b98cff;--ultra#00e5ff;--xp#6ee0ff;--luck#4ade80;--crit#ff4d6d;--divine#ff6bff}
+@font-face{font-family'Inter';srcurl('httpscdn.jsdelivr.netfontsourcefontsinter@latestlatin-400-normal.woff2') format('woff2');font-weight400}
+@font-face{font-family'Inter';srcurl('httpscdn.jsdelivr.netfontsourcefontsinter@latestlatin-700-normal.woff2') format('woff2');font-weight700}
+html{scroll-behaviorsmooth}
+body{font-family'Inter',sans-serif;backgroundradial-gradient(1200px 600px at 50% -10%,#241a45,#0a0812 70%);colorvar(--text);min-height100vh;overflow-xhidden}
+.app{max-width1060px;margin0 auto;padding20px}
+header{displayflex;justify-contentspace-between;align-itemscenter;gap10px;padding14px 20px;backgroundlinear-gradient(135deg,var(--surface),var(--surface2));border-radius16px;border1px solid var(--border);margin-bottom18px;box-shadow0 8px 32px rgba(0,0,0,.5);flex-wrapwrap}
+.logo{displayflex;align-itemscenter;gap8px;font-size1.15rem;font-weight700;letter-spacing2px;color#d8ccf5;text-shadow0 0 20px rgba(176,128,255,.35)}
+.logo span{colorvar(--money)}
+.logo-bottle{width24px;height34px;flex-shrink0;filterdrop-shadow(0 0 8px rgba(185,140,255,.6))}
+.hdr-right{displayflex;align-itemscenter;gap6px;flex-wrapwrap}
+.stat-pill{displayflex;align-itemscenter;gap5px;backgroundrgba(0,0,0,.35);padding6px 12px;border-radius10px;border1px solid var(--border);font-size.72rem;font-weight700}
+.stat-pill.luck{colorvar(--luck);border-colorrgba(74,222,128,.3)}
+.stat-pill.prestige{colorvar(--legendary);border-colorrgba(255,215,64,.3)}
+.btn-icon{width38px;height38px;border-radius10px;border1px solid var(--border);backgroundrgba(0,0,0,.35);colorvar(--text);font-size1rem;cursorpointer;transitionall .2s}
+.btn-iconhover{backgroundrgba(255,255,255,.07)}
+.btn-icon.off{opacity.4;filtergrayscale(1)}
+.btn-icon.promo{backgroundlinear-gradient(135deg,rgba(255,215,64,.22),rgba(255,112,67,.18));border-colorrgba(255,215,64,.45);colorvar(--legendary);positionrelative;overflowhidden}
+.btn-icon.promohover{backgroundlinear-gradient(135deg,rgba(255,215,64,.35),rgba(255,112,67,.28));transformtranslateY(-2px);box-shadow0 4px 16px rgba(255,215,64,.35)}
+.btn-icon.promoafter{content'';positionabsolute;top-50%;left-50%;width200%;height200%;backgroundlinear-gradient(45deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);animationshine 3s infinite}
+@keyframes shine{0%{transformtranslateX(-100%) rotate(45deg)}100%{transformtranslateX(100%) rotate(45deg)}}
+.btn-nav{padding7px 12px;border-radius10px;border1px solid var(--border);backgroundrgba(0,0,0,.35);colorvar(--text);font-size.72rem;font-weight700;cursorpointer;transitionall .2s;letter-spacing.5px}
+.btn-navhover{backgroundrgba(255,255,255,.07)}
+.btn-nav.active{backgroundlinear-gradient(135deg,rgba(185,140,255,.25),rgba(185,140,255,.1));border-colorvar(--money);colorvar(--money)}
+.view{displaynone}
+.view.active{displayblock;animationfadeIn .3s}
+.activity-feed{positionfixed;top90px;right20px;width260px;z-index50;pointer-eventsnone;displayflex;flex-directioncolumn;gap6px}
+.activity-item{backgroundlinear-gradient(135deg,rgba(20,16,36,.95),rgba(28,21,51,.95));border1px solid var(--border);border-radius10px;padding9px 12px;font-size.72rem;backdrop-filterblur(8px);animationactIn .4s ease-out,actOut .4s ease-in 5.6s forwards;box-shadow0 6px 20px rgba(0,0,0,.4)}
+@keyframes actIn{from{opacity0;transformtranslateX(100px)}to{opacity1;transformtranslateX(0)}}
+@keyframes actOut{to{opacity0;transformtranslateX(100px)}}
+.activity-item .ai-user{colorvar(--text-dim);font-weight700}
+.activity-item .ai-item{font-weight700}
+.section-title{font-size1.3rem;font-weight700;margin-bottom14px;letter-spacing1px;displayflex;align-itemscenter;gap10px;flex-wrapwrap}
+.section-title .sub{font-size.8rem;colorvar(--text-dim);font-weight400;letter-spacing0}
+.grid-2{displaygrid;grid-template-columnsrepeat(auto-fill,minmax(280px,1fr));gap16px}
+.card{backgroundlinear-gradient(160deg,var(--surface),var(--surface2));border1px solid var(--border);border-radius14px;padding18px;transitionall .25s}
+.cardhover{border-colorrgba(185,140,255,.35)}
+.clicker-section{displayflex;gap24px;align-itemscenter;justify-contentcenter;backgroundlinear-gradient(135deg,var(--surface),var(--surface2));border1px solid var(--border);border-radius16px;padding20px;margin-bottom20px;flex-wrapwrap;box-shadow0 8px 32px rgba(0,0,0,.4)}
+.clicker-left{positionrelative;width150px;height150px;displayflex;align-itemscenter;justify-contentcenter;flex-shrink0}
+.clicker-btn{width120px;height120px;border-radius50%;bordernone;cursorpointer;backgroundradial-gradient(circle at 32% 28%,#e6d4ff,#9b5cff 45%,#4c1d95 100%);box-shadow0 10px 30px rgba(155,92,255,.45),inset 0 -6px 14px rgba(0,0,0,.35),inset 0 6px 12px rgba(255,255,255,.35);font-size2.8rem;font-weight700;color#2a1050;transitiontransform .07s;user-selectnone;-webkit-tap-highlight-colortransparent;touch-actionmanipulation}
+.clicker-btnactive{transformscale(.9)}
+.combo-ring{positionabsolute;inset-14px;border-radius50%;border2px solid var(--money);opacity0;pointer-eventsnone}
+.combo-ring.pulse{animationcomboRing .6s ease-out}
+@keyframes comboRing{0%{opacity.8;transformscale(.8)}100%{opacity0;transformscale(1.4)}}
+.combo-display{positionabsolute;top-8px;right-8px;backgroundlinear-gradient(135deg,#ff7043,#b03020);color#fff;font-size.72rem;font-weight700;padding4px 9px;border-radius10px;opacity0;transformscale(.5);transitionall .2s}
+.combo-display.show{opacity1;transformscale(1)}
+.float-plus{positionabsolute;left50%;top40%;pointer-eventsnone;colorvar(--money);font-weight700;font-size.95rem;text-shadow0 0 8px rgba(185,140,255,.7);animationfloatUp .8s ease-out forwards;z-index5}
+.float-plus.crit{colorvar(--crit);text-shadow0 0 12px rgba(255,77,109,.9);font-size1.3rem}
+@keyframes floatUp{from{opacity1;transformtranslate(-50%,0) scale(1)}to{opacity0;transformtranslate(-50%,-70px) scale(1.2)}}
+.clicker-title{font-size1.1rem;font-weight700;margin-bottom6px}
+.clicker-desc{font-size.85rem;colorvar(--text-dim);margin-bottom12px}
+.clicker-desc b{colorvar(--money)}
+.clicker-stats{displayflex;gap10px;flex-wrapwrap;margin-bottom10px}
+.stat{backgroundvar(--surface);padding8px 14px;border-radius10px;border1px solid var(--border);text-aligncenter;min-width90px}
+.stat-val{font-size.95rem;font-weight700;font-variant-numerictabular-nums}
+.stat-label{font-size.62rem;colorvar(--text-dim);text-transformuppercase;letter-spacing1px;margin-top2px}
+.upgrades{displayflex;gap6px;flex-wrapwrap;justify-contentcenter}
+.upgrade-btn{padding7px 12px;border-radius8px;border1px solid var(--border);backgroundrgba(0,0,0,.3);colorvar(--text);font-size.7rem;font-weight700;cursorpointer;transitionall .2s;displayflex;flex-directioncolumn;align-itemscenter;gap2px;min-width90px}
+.upgrade-btnhovernot(disabled){backgroundrgba(185,140,255,.15);border-colorvar(--money)}
+.upgrade-btndisabled{opacity.4;cursornot-allowed}
+.upgrade-btn.owned{backgroundlinear-gradient(135deg,rgba(110,224,255,.15),rgba(110,224,255,.05));border-colorvar(--xp);colorvar(--xp)}
+.case-select{displayflex;gap12px;justify-contentcenter;margin-bottom16px;flex-wrapwrap}
+.case-opt{width170px;backgroundvar(--surface);border2px solid var(--border);border-radius14px;padding10px;cursorpointer;text-aligncenter;transitionall .25s;positionrelative;overflowhidden}
+.case-opthover{transformtranslateY(-3px)}
+.case-opt img{width105px;height78px;object-fitcontain;filterdrop-shadow(0 8px 14px rgba(0,0,0,.55));pointer-eventsnone}
+.co-name{font-size.72rem;font-weight700;margin-top4px;line-height1.2;min-height1.8em}
+.co-price{font-size.85rem;font-weight700;colorvar(--money);margin-top2px}
+.co-tag{positionabsolute;top6px;right-26px;transformrotate(35deg);font-size.5rem;font-weight700;letter-spacing1px;padding2px 24px;backgroundlinear-gradient(135deg,#ffd740,#b8860b);color#241a00}
+.co-tag.red{backgroundlinear-gradient(135deg,#ff5040,#7a1408);color#fff}
+.co-tag.cyan{backgroundlinear-gradient(135deg,#00e5ff,#0077aa);color#001a22}
+.co-tag.divine{backgroundlinear-gradient(135deg,#ff6bff,#b030c0);color#fff;animationdivineTag 2s ease-in-out infinite}
+@keyframes divineTag{0%,100%{filterbrightness(1)}50%{filterbrightness(1.3)}}
+.case-opt.selected{border-colorvar(--money);box-shadow0 0 24px rgba(185,140,255,.3)}
+.case-opt.premium.selected{border-colorvar(--legendary);box-shadow0 0 28px rgba(255,215,64,.3)}
+.case-opt.legend.selected{border-color#ff5040;box-shadow0 0 30px rgba(255,80,64,.35)}
+.case-opt.ultra.selected{border-colorvar(--ultra);box-shadow0 0 32px rgba(0,229,255,.4)}
+.case-opt.divine.selected{border-colorvar(--divine);box-shadow0 0 35px rgba(255,107,255,.5)}
+.case-opt.premium .co-price{colorvar(--legendary)}
+.case-opt.legend .co-price{color#ff7060}
+.case-opt.ultra .co-price{colorvar(--ultra)}
+.case-opt.divine .co-price{colorvar(--divine)}
+.case-section{displayflex;flex-directioncolumn;align-itemscenter;gap12px;margin-bottom22px}
+.case-stage{positionrelative;width340px;height260px;displayflex;align-itemscenter;justify-contentcenter;cursorpointer;user-selectnone}
+.case-glow{positionabsolute;width110%;height90%;top55%;left50%;transformtranslate(-50%,-50%);backgroundradial-gradient(ellipse,var(--glow,rgba(150,90,255,.16)),transparent 65%);pointer-eventsnone}
+.case-stage.hot .case-glow{backgroundradial-gradient(ellipse,var(--glowHot,rgba(200,140,255,.4)),transparent 65%)}
+.case-float{animationcaseFloat 3.6s ease-in-out infinite;positionrelative;z-index2}
+@keyframes caseFloat{0%,100%{transformtranslateY(0)}50%{transformtranslateY(-12px)}}
+.case-img{width270px;max-width78vw;heightauto;filterdrop-shadow(0 28px 32px rgba(0,0,0,.65));transitionfilter .3s}
+.case-img.shaking{animationcaseShake .45s ease-in-out}
+@keyframes caseShake{0%,100%{transformtranslateX(0) rotate(0)}15%{transformtranslateX(-10px) rotate(-2deg)}30%{transformtranslateX(10px) rotate(2deg)}45%{transformtranslateX(-7px) rotate(-1.5deg)}60%{transformtranslateX(7px) rotate(1.5deg)}75%{transformtranslateX(-4px) rotate(-.8deg)}}
+.case-img.opened{animationcaseOpenPop .7s cubic-bezier(.2,1.5,.4,1)}
+@keyframes caseOpenPop{0%{transformscale(.9)}55%{transformscale(1.1)}100%{transformscale(1.04)}}
+.case-flash{positionabsolute;inset-10%;backgroundradial-gradient(circle at 50% 55%,rgba(225,190,255,.95),rgba(160,90,255,.45) 30%,transparent 65%);opacity0;pointer-eventsnone;z-index3}
+.case-flash.go{animationflash 1s ease-out}
+@keyframes flash{0%{opacity0}15%{opacity1}100%{opacity0}}
+.case-label{text-aligncenter}
+.case-name{font-size1.15rem;font-weight700;letter-spacing1px}
+.case-price{font-size.9rem;colorvar(--text-dim);margin-top3px}
+.odds-bar{displayflex;width100%;max-width520px;height22px;border-radius8px;overflowhidden;border1px solid var(--border);font-size.58rem;font-weight700}
+.odds-seg{displayflex;align-itemscenter;justify-contentcenter;color#120c20;white-spacenowrap;overflowhidden}
+.btn-open{padding14px 48px;font-size.95rem;font-weight700;bordernone;border-radius12px;cursorpointer;backgroundlinear-gradient(135deg,#7c3aed,#5b21b6);color#ece0ff;box-shadow0 4px 20px rgba(124,58,237,.45),inset 0 1px 0 rgba(255,255,255,.2);transitionall .25s;text-transformuppercase;letter-spacing3px;border1px solid rgba(180,140,255,.35)}
+.btn-open.gold{backgroundlinear-gradient(135deg,#c9a227,#8a6a10);border-colorrgba(255,215,64,.45);color#fff8dc}
+.btn-open.red{backgroundlinear-gradient(135deg,#b03020,#6e1408);border-colorrgba(255,100,80,.5);color#ffe4de}
+.btn-open.cyan{backgroundlinear-gradient(135deg,#00b8d4,#006a7a);border-colorrgba(0,229,255,.5);color#e0fcff}
+.btn-open.divine{backgroundlinear-gradient(135deg,#ff6bff,#b030c0);border-colorrgba(255,107,255,.6);color#fff;box-shadow0 4px 26px rgba(255,107,255,.5),inset 0 1px 0 rgba(255,255,255,.3);animationdivineBtn 3s ease-in-out infinite}
+@keyframes divineBtn{0%,100%{filterbrightness(1)}50%{filterbrightness(1.15)}}
+.btn-openhovernot(disabled){transformtranslateY(-2px);filterbrightness(1.12)}
+.btn-opendisabled{opacity.4;cursornot-allowed}
+.roulette-section{displaynone;margin-bottom24px;overflowhidden;border-radius16px;backgroundlinear-gradient(180deg,#0d0a18,#141024);border1px solid var(--border);padding20px 0;positionrelative;box-shadowinset 0 0 60px rgba(0,0,0,.6)}
+.roulette-section.active{displayblock;animationfadeIn .3s}
+.roulette-sectionbefore,.roulette-sectionafter{content'';positionabsolute;top0;bottom0;width80px;z-index5;pointer-eventsnone}
+.roulette-sectionbefore{left0;backgroundlinear-gradient(to right,#0d0a18,transparent)}
+.roulette-sectionafter{right0;backgroundlinear-gradient(to left,#0d0a18,transparent)}
+.roulette-pointer{positionabsolute;top0;left50%;transformtranslateX(-50%);z-index10;width3px;height100%;backgroundlinear-gradient(to bottom,rgba(200,140,255,.95),rgba(200,140,255,.15));box-shadow0 0 12px rgba(185,140,255,.8)}
+.roulette-pointerbefore{content'';positionabsolute;top-4px;left50%;transformtranslateX(-50%);border-left9px solid transparent;border-right9px solid transparent;border-top13px solid #c88cff;filterdrop-shadow(0 0 6px #b98cff)}
+.roulette-track{displayflex;gap8px;padding0 calc(50% - 60px);widthmax-content;will-changetransform}
+.roulette-track.spinning{transitiontransform 5.2s cubic-bezier(.12,.82,.16,1)}
+.roulette-item{flex-shrink0;width120px;height150px;border-radius10px;displayflex;flex-directioncolumn;align-itemscenter;justify-contentspace-between;gap4px;padding10px 8px;border2px solid;positionrelative;overflowhidden}
+.roulette-itembefore{content'';positionabsolute;top0;left0;right0;height55%;backgroundlinear-gradient(to bottom,rgba(255,255,255,.06),transparent);pointer-eventsnone}
+.r-img{width86px;height62px;object-fitcontain;filterdrop-shadow(0 4px 8px rgba(0,0,0,.6));margin-top4px}
+.r-name{font-size.62rem;text-aligncenter;font-weight700;line-height1.25;height2.4em;overflowhidden}
+.r-price{font-size.72rem;font-weight700}
+.wheel-wrap{displayflex;gap24px;align-itemscenter;justify-contentcenter;flex-wrapwrap}
+.wheel-stage{positionrelative;width320px;height320px;flex-shrink0}
+.wheel-canvas{width100%;height100%;filterdrop-shadow(0 10px 30px rgba(185,140,255,.3))}
+.wheel-pointer{positionabsolute;top-8px;left50%;transformtranslateX(-50%);width0;height0;border-left14px solid transparent;border-right14px solid transparent;border-top24px solid var(--money);filterdrop-shadow(0 0 8px rgba(185,140,255,.7));z-index5}
+.wheel-info{flex1;min-width240px}
+.wheel-timer{font-size1.6rem;font-weight700;colorvar(--money);font-variant-numerictabular-nums;margin-bottom8px}
+.btn-wheel{padding12px 28px;bordernone;border-radius10px;backgroundlinear-gradient(135deg,var(--money),#7c3aed);color#fff;font-size.9rem;font-weight700;cursorpointer;letter-spacing1px;transitionall .2s;text-transformuppercase}
+.btn-wheelhovernot(disabled){transformtranslateY(-2px);filterbrightness(1.15)}
+.btn-wheeldisabled{opacity.4;cursornot-allowed}
+.quest-card{displayflex;flex-directioncolumn;gap10px}
+.quest-head{displayflex;align-itemscenter;gap10px}
+.quest-icon{font-size1.8rem}
+.quest-title{font-size.95rem;font-weight700;flex1}
+.quest-reward{colorvar(--money);font-weight700;font-size.85rem}
+.quest-progress-bar{height8px;backgroundrgba(0,0,0,.4);border-radius4px;overflowhidden}
+.quest-progress-fill{height100%;backgroundlinear-gradient(90deg,var(--money),var(--xp));border-radius4px;transitionwidth .4s}
+.quest-progress-text{font-size.72rem;colorvar(--text-dim);font-variant-numerictabular-nums}
+.btn-quest{padding8px;bordernone;border-radius8px;backgroundlinear-gradient(135deg,var(--money),#7c3aed);color#fff;font-size.78rem;font-weight700;cursorpointer;letter-spacing1px;text-transformuppercase;transitionall .2s}
+.btn-questhovernot(disabled){filterbrightness(1.15)}
+.btn-questdisabled{opacity.4;cursornot-allowed;backgroundvar(--border)}
+.btn-quest.claimed{backgroundrgba(110,224,110,.15);color#6ee06e;cursordefault}
+.collection-grid{displaygrid;grid-template-columnsrepeat(auto-fill,minmax(130px,1fr));gap10px}
+.coll-card{backgroundvar(--surface);border1px solid var(--border);border-radius10px;padding10px;text-aligncenter;transitionall .2s;positionrelative;overflowhidden}
+.coll-card.owned{border-colorrgba(185,140,255,.3)}
+.coll-card.locked{opacity.4;filtergrayscale(.8)}
+.coll-cardbefore{content'';positionabsolute;top0;left0;right0;height3px}
+.coll-card.rarity-commonbefore{backgroundvar(--common)}
+.coll-card.rarity-rarebefore{backgroundvar(--rare)}
+.coll-card.rarity-epicbefore{backgroundvar(--epic)}
+.coll-card.rarity-mythicbefore{backgroundvar(--mythic)}
+.coll-card.rarity-legendarybefore{backgroundvar(--legendary)}
+.coll-card img{width70px;height70px;object-fitcontain;filterdrop-shadow(0 3px 6px rgba(0,0,0,.5))}
+.coll-card .cc-name{font-size.7rem;font-weight700;margin-top4px;line-height1.2}
+.coll-card .cc-rarity{font-size.58rem;text-transformuppercase;letter-spacing1px;font-weight700;margin-top2px}
+.coll-card .cc-count{font-size.7rem;colorvar(--money);margin-top4px;font-weight700}
+.coll-card .cc-lock{positionabsolute;top50%;left50%;transformtranslate(-50%,-50%);font-size1.5rem;opacity.6}
+.market-header{displayflex;justify-contentspace-between;align-itemscenter;gap14px;margin-bottom22px;flex-wrapwrap}
+.market-title{font-size1.5rem;font-weight700;letter-spacing2px;colorvar(--money);text-shadow0 0 20px rgba(185,140,255,.4)}
+.market-sub{font-size.85rem;colorvar(--text-dim);margin-top4px}
+.bots-grid{displaygrid;grid-template-columnsrepeat(auto-fill,minmax(280px,1fr));gap18px}
+.bot-card{backgroundlinear-gradient(160deg,var(--surface),var(--surface2));border1px solid var(--border);border-radius16px;padding18px;transitionall .25s}
+.bot-cardhover{border-colorrgba(185,140,255,.4);box-shadow0 10px 30px rgba(0,0,0,.4)}
+.bot-head{displayflex;align-itemscenter;gap12px;margin-bottom14px;padding-bottom12px;border-bottom1px solid var(--border)}
+.bot-avatar{width54px;height54px;border-radius50%;displayflex;align-itemscenter;justify-contentcenter;font-size1.8rem;flex-shrink0;border2px solid var(--border);backgroundradial-gradient(circle at 30% 30%,rgba(255,255,255,.1),transparent 60%)}
+.bot-info{flex1;min-width0}
+.bot-name{font-size1rem;font-weight700;letter-spacing.5px}
+.bot-rank{font-size.7rem;colorvar(--text-dim);text-transformuppercase;letter-spacing1px;margin-top2px}
+.bot-status{displayinline-flex;align-itemscenter;gap5px;font-size.68rem;color#6ee06e;margin-top4px}
+.bot-statusbefore{content'';width7px;height7px;border-radius50%;background#6ee06e;box-shadow0 0 6px #6ee06e;animationpulse 2s infinite}
+@keyframes pulse{0%,100%{opacity1}50%{opacity.4}}
+.bot-items{displayflex;flex-directioncolumn;gap8px}
+.bot-item{displayflex;align-itemscenter;gap10px;padding10px;border-radius10px;backgroundrgba(0,0,0,.25);border1px solid var(--border);transitionall .2s}
+.bot-itemhover{backgroundrgba(0,0,0,.4);border-colorrgba(185,140,255,.3)}
+.bot-item-img{width52px;height52px;border-radius8px;displayflex;align-itemscenter;justify-contentcenter;flex-shrink0;backgroundradial-gradient(ellipse,rgba(185,140,255,.15),transparent 70%)}
+.bot-item-img img{width44px;height44px;object-fitcontain;filterdrop-shadow(0 3px 6px rgba(0,0,0,.5))}
+.bot-item-info{flex1;min-width0}
+.bot-item-name{font-size.8rem;font-weight700;margin-bottom2px;white-spacenowrap;overflowhidden;text-overflowellipsis}
+.bot-item-rarity{font-size.62rem;text-transformuppercase;letter-spacing1px;font-weight700}
+.bot-item-price{font-size.85rem;font-weight700;colorvar(--money);margin-top2px;font-variant-numerictabular-nums}
+.btn-buy{padding8px 14px;bordernone;border-radius8px;font-size.72rem;font-weight700;cursorpointer;backgroundlinear-gradient(135deg,rgba(185,140,255,.22),rgba(185,140,255,.08));colorvar(--money);border1px solid rgba(185,140,255,.35);transitionall .2s;text-transformuppercase;letter-spacing1px;flex-shrink0}
+.btn-buyhovernot(disabled){backgroundlinear-gradient(135deg,rgba(185,140,255,.35),rgba(185,140,255,.15));transformscale(1.05)}
+.btn-buydisabled{opacity.4;cursornot-allowed}
+.btn-buy.bought{backgroundrgba(110,224,110,.12);color#6ee06e;border-colorrgba(110,224,110,.3)}
+.profile-head{displayflex;align-itemscenter;gap20px;margin-bottom24px;flex-wrapwrap;padding20px;backgroundlinear-gradient(135deg,rgba(185,140,255,.08),rgba(110,224,255,.04));border1px solid var(--border);border-radius16px}
+.profile-avatar{width100px;height100px;border-radius50%;displayflex;align-itemscenter;justify-contentcenter;font-size3.5rem;backgroundradial-gradient(circle at 30% 30%,rgba(185,140,255,.3),rgba(20,16,36,.8));border3px solid var(--money);box-shadow0 0 30px rgba(185,140,255,.3);flex-shrink0}
+.profile-info{flex1;min-width200px}
+.profile-name{font-size1.6rem;font-weight700;letter-spacing1px;colorvar(--money);text-shadow0 0 16px rgba(185,140,255,.4)}
+.profile-rank{font-size.85rem;colorvar(--text-dim);margin-top4px;letter-spacing1px}
+.profile-balance-big{font-size2.2rem;font-weight700;colorvar(--money);margin-top8px;font-variant-numerictabular-nums}
+.profile-stats{displaygrid;grid-template-columnsrepeat(auto-fill,minmax(150px,1fr));gap12px;margin-bottom20px}
+.profile-stat{backgroundrgba(0,0,0,.25);border1px solid var(--border);border-radius10px;padding12px;text-aligncenter}
+.profile-stat .ps-val{font-size1.15rem;font-weight700;font-variant-numerictabular-nums}
+.profile-stat .ps-label{font-size.62rem;colorvar(--text-dim);text-transformuppercase;letter-spacing1px;margin-top3px}
+.profile-stat.positive .ps-val{colorvar(--luck)}
+.profile-stat.negative .ps-val{color#ff5566}
+.profile-stat.money .ps-val{colorvar(--money)}
+.profile-stat.legendary .ps-val{colorvar(--legendary)}
+.profile-stat.xp .ps-val{colorvar(--xp)}
+.profile-stat.luck .ps-val{colorvar(--luck)}
+.profile-stat.crit .ps-val{colorvar(--crit)}
+.history-section{backgroundlinear-gradient(160deg,var(--surface),var(--surface2));border1px solid var(--border);border-radius16px;padding18px;margin-top18px}
+.history-head{displayflex;justify-contentspace-between;align-itemscenter;margin-bottom14px;flex-wrapwrap;gap10px}
+.history-title{font-size1.1rem;font-weight700;displayflex;align-itemscenter;gap8px}
+.history-list{displayflex;flex-directioncolumn;gap6px;max-height500px;overflow-yauto;padding-right6px}
+.history-list-webkit-scrollbar{width6px}
+.history-list-webkit-scrollbar-track{backgroundrgba(0,0,0,.2);border-radius3px}
+.history-list-webkit-scrollbar-thumb{backgroundvar(--border);border-radius3px}
+.history-item{displayflex;align-itemscenter;gap12px;padding10px 14px;backgroundrgba(0,0,0,.25);border1px solid var(--border);border-radius10px;font-size.82rem;transitionall .2s}
+.history-itemhover{border-colorrgba(185,140,255,.3)}
+.history-icon{font-size1.4rem;flex-shrink0}
+.history-info{flex1;min-width0}
+.history-title-text{font-weight700;margin-bottom2px}
+.history-sub{font-size.7rem;colorvar(--text-dim)}
+.history-amount{font-weight700;font-variant-numerictabular-nums;flex-shrink0;text-alignright;min-width80px}
+.history-amount.pos{colorvar(--luck)}
+.history-amount.neg{color#ff5566}
+.history-amount.neutral{colorvar(--text-dim)}
+.history-empty{text-aligncenter;padding30px;colorvar(--text-dim);font-size.85rem}
+.btn-clear-history{padding8px 16px;bordernone;border-radius8px;backgroundrgba(255,85,102,.1);color#ff5566;border1px solid rgba(255,85,102,.3);font-size.72rem;font-weight700;cursorpointer;text-transformuppercase;letter-spacing1px;transitionall .2s}
+.btn-clear-historyhover{backgroundrgba(255,85,102,.2)}
+.inventory-section{margin-top8px}
+.inv-header{displayflex;justify-contentspace-between;align-itemscenter;margin-bottom12px;gap10px;flex-wrapwrap}
+.inv-title{font-size1.05rem;font-weight700}
+.inv-total{colorvar(--text-dim);font-size.82rem;font-variant-numerictabular-nums}
+.btn-sell-all{padding8px 18px;bordernone;border-radius10px;font-size.78rem;font-weight700;cursorpointer;backgroundlinear-gradient(135deg,rgba(185,140,255,.2),rgba(185,140,255,.06));colorvar(--money);border1px solid rgba(185,140,255,.4);transitionall .2s;text-transformuppercase;letter-spacing1px}
+.btn-sell-allhover{backgroundlinear-gradient(135deg,rgba(185,140,255,.32),rgba(185,140,255,.14))}
+.inv-grid{displaygrid;grid-template-columnsrepeat(auto-fill,minmax(150px,1fr));gap10px}
+.inv-card{backgroundvar(--surface);border-radius12px;padding12px;border1px solid var(--border);displayflex;flex-directioncolumn;align-itemscenter;gap5px;transitiontransform .2s,box-shadow .2s;positionrelative;overflowhidden;animationcardIn .4s ease-out}
+.inv-cardhover{transformtranslateY(-3px);box-shadow0 10px 26px rgba(0,0,0,.4)}
+.inv-cardbefore{content'';positionabsolute;top0;left0;right0;height3px}
+.inv-card.rarity-common{border-colorrgba(176,184,200,.25)}.inv-card.rarity-commonbefore{backgroundvar(--common)}
+.inv-card.rarity-rare{border-colorrgba(171,71,188,.3)}.inv-card.rarity-rarebefore{backgroundvar(--rare)}
+.inv-card.rarity-epic{border-colorrgba(255,112,67,.3)}.inv-card.rarity-epicbefore{backgroundvar(--epic)}
+.inv-card.rarity-mythic{border-colorrgba(233,53,255,.35)}.inv-card.rarity-mythicbefore{backgroundvar(--mythic)}
+.inv-card.rarity-legendary{border-colorrgba(255,215,64,.4)}.inv-card.rarity-legendarybefore{backgroundvar(--legendary)}
+.item-img-wrap{width100%;height85px;displayflex;align-itemscenter;justify-contentcenter;border-radius8px}
+.item-img{max-width100%;max-height80px;object-fitcontain;filterdrop-shadow(0 5px 10px rgba(0,0,0,.55))}
+.inv-card .item-name{font-size.75rem;font-weight700;text-aligncenter}
+.inv-card .item-rarity{font-size.58rem;text-transformuppercase;letter-spacing1px;font-weight700}
+.inv-card .item-price{font-size.85rem;font-weight700;colorvar(--money);font-variant-numerictabular-nums}
+.btn-sell{width100%;padding7px;bordernone;border-radius8px;font-size.68rem;font-weight700;cursorpointer;backgroundrgba(185,140,255,.1);colorvar(--money);border1px solid rgba(185,140,255,.28);transitionall .2s;text-transformuppercase;letter-spacing1px}
+.btn-sellhover{backgroundrgba(185,140,255,.22)}
+.empty-inv{grid-column1-1;text-aligncenter;padding30px;colorvar(--text-dim);font-size.85rem}
+.modal-overlay{displaynone;positionfixed;top0;left0;right0;bottom0;backgroundrgba(0,0,0,.82);z-index100;align-itemscenter;justify-contentcenter;backdrop-filterblur(8px)}
+.modal-overlay.active{displayflex;animationfadeIn .3s}
+.modal{backgroundlinear-gradient(160deg,#1c1533,#120e22);border-radius24px;padding38px 34px;text-aligncenter;max-width420px;width92%;border1px solid var(--border);positionrelative;overflowhidden;box-shadow0 30px 80px rgba(0,0,0,.7)}
+.modalbefore{content'';positionabsolute;top-50%;left-50%;width200%;height200%;backgroundconic-gradient(from 0deg,transparent,rgba(150,90,255,.1),transparent,rgba(255,215,64,.05),transparent);animationmodalSpin 5s linear infinite}
+.modal-content{positionrelative;z-index1}
+.won-label{font-size.75rem;colorvar(--text-dim);text-transformuppercase;letter-spacing3px;margin-bottom8px}
+.won-img-wrap{width230px;height155px;margin8px auto;displayflex;align-itemscenter;justify-contentcenter;border-radius16px}
+.won-img{max-width92%;max-height140px;object-fitcontain;filterdrop-shadow(0 12px 28px rgba(0,0,0,.7));animationwonPop .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes wonPop{0%{transformscale(.5);opacity0}100%{transformscale(1);opacity1}}
+.won-name{font-size1.2rem;font-weight700;margin-bottom4px}
+.won-rarity{font-size.72rem;text-transformuppercase;letter-spacing2px;font-weight700;margin-bottom10px}
+.won-price{font-size1.8rem;font-weight700;colorvar(--money);margin-bottom16px;text-shadow0 0 20px rgba(185,140,255,.45);font-variant-numerictabular-nums}
+.btn-close-modal{padding12px 36px;bordernone;border-radius12px;font-size.9rem;font-weight700;cursorpointer;backgroundlinear-gradient(135deg,#7c3aed,#5b21b6);color#ece0ff;transitionall .25s;letter-spacing1px}
+.btn-close-modalhover{transformscale(1.05)}
+.double-choices{displayflex;gap12px;margin-top18px;justify-contentcenter}
+.btn-double{flex1;padding16px;bordernone;border-radius12px;font-size.9rem;font-weight700;cursorpointer;transitionall .2s;letter-spacing1px}
+.btn-double.take{backgroundlinear-gradient(135deg,var(--money),#7c3aed);color#fff}
+.btn-double.risk{backgroundlinear-gradient(135deg,var(--crit),#7a1408);color#fff}
+.btn-doublehover{transformtranslateY(-2px);filterbrightness(1.15)}
+.double-odds{font-size.78rem;colorvar(--text-dim);margin-top10px}
+.daily-modal{max-width440px}
+.daily-streak{displayflex;gap6px;justify-contentcenter;margin14px 0;flex-wrapwrap}
+.daily-day{width42px;height52px;border-radius8px;backgroundrgba(0,0,0,.3);border1px solid var(--border);displayflex;flex-directioncolumn;align-itemscenter;justify-contentcenter;gap2px;font-size.65rem;font-weight700}
+.daily-day.claimed{backgroundlinear-gradient(135deg,rgba(185,140,255,.25),rgba(185,140,255,.1));border-colorvar(--money);colorvar(--money)}
+.daily-day.today{backgroundlinear-gradient(135deg,rgba(255,215,64,.25),rgba(255,215,64,.1));border-colorvar(--legendary);colorvar(--legendary);animationpulseDay 1.5s infinite}
+.daily-day .day-num{font-size.55rem;colorvar(--text-dim)}
+.daily-day .day-reward{font-size.7rem}
+@keyframes pulseDay{0%,100%{transformscale(1)}50%{transformscale(1.05)}}
+.promo-modal{max-width460px;padding36px 32px}
+.promo-icon{font-size3.5rem;margin-bottom10px;animationpromoShake 2s ease-in-out infinite}
+@keyframes promoShake{0%,100%{transformrotate(0)}25%{transformrotate(-8deg)}75%{transformrotate(8deg)}}
+.promo-title{font-size1.3rem;font-weight700;colorvar(--legendary);margin-bottom6px;text-shadow0 0 16px rgba(255,215,64,.4)}
+.promo-desc{font-size.85rem;colorvar(--text-dim);margin-bottom18px;line-height1.5}
+.promo-input-wrap{positionrelative;margin-bottom14px}
+.promo-input{width100%;padding14px 16px;backgroundrgba(0,0,0,.4);border2px solid var(--border);border-radius12px;colorvar(--text);font-size1rem;font-weight700;letter-spacing2px;text-aligncenter;font-family'Inter',sans-serif;transitionall .2s;outlinenone}
+.promo-inputfocus{border-colorvar(--legendary);box-shadow0 0 20px rgba(255,215,64,.25)}
+.promo-inputplaceholder{colorvar(--text-dim);letter-spacing1px;font-weight400}
+.promo-input.error{border-color#ff5566;animationinputShake .4s}
+.promo-input.success{border-colorvar(--luck);box-shadow0 0 20px rgba(74,224,128,.3)}
+@keyframes inputShake{0%,100%{transformtranslateX(0)}20%{transformtranslateX(-8px)}40%{transformtranslateX(8px)}60%{transformtranslateX(-6px)}80%{transformtranslateX(6px)}}
+.btn-activate{width100%;padding14px;bordernone;border-radius12px;backgroundlinear-gradient(135deg,var(--legendary),#b8860b);color#241a00;font-size1rem;font-weight700;cursorpointer;letter-spacing2px;text-transformuppercase;transitionall .2s;box-shadow0 4px 20px rgba(255,215,64,.3)}
+.btn-activatehovernot(disabled){transformtranslateY(-2px);filterbrightness(1.1);box-shadow0 6px 24px rgba(255,215,64,.5)}
+.btn-activatedisabled{opacity.5;cursornot-allowed}
+.promo-used{margin-top14px;padding10px;backgroundrgba(0,0,0,.3);border-radius10px;font-size.78rem;colorvar(--text-dim)}
+.promo-used b{colorvar(--legendary)}
+.promo-result{margin-top14px;padding14px;backgroundlinear-gradient(135deg,rgba(255,215,64,.12),rgba(255,112,67,.08));border1px solid rgba(255,215,64,.35);border-radius12px;animationpromoSuccess .5s ease-out}
+@keyframes promoSuccess{from{opacity0;transformscale(.9)}to{opacity1;transformscale(1)}}
+.promo-result .pr-title{colorvar(--luck);font-weight700;font-size.9rem;margin-bottom6px}
+.promo-result .pr-detail{colorvar(--text);font-size.85rem;line-height1.4}
+.promo-result .pr-detail b{colorvar(--legendary)}
+.toast{positionfixed;bottom20px;left50%;transformtranslateX(-50%) translateY(20px);backgroundlinear-gradient(135deg,var(--surface),var(--surface2));border1px solid var(--money);colorvar(--money);padding10px 22px;border-radius10px;font-size.82rem;font-weight700;letter-spacing1px;opacity0;pointer-eventsnone;transitionall .3s;z-index200;box-shadow0 8px 30px rgba(185,140,255,.3);max-width90%}
+.toast.show{opacity1;transformtranslateX(-50%) translateY(0)}
+.toast.err{border-color#ff5566;color#ff5566;box-shadow0 8px 30px rgba(255,85,102,.3)}
+.toast.luck{border-colorvar(--luck);colorvar(--luck);box-shadow0 8px 30px rgba(74,224,128,.3)}
+.toast.crit{border-colorvar(--crit);colorvar(--crit);box-shadow0 8px 30px rgba(255,77,109,.4)}
+.toast.promo{border-colorvar(--legendary);colorvar(--legendary);box-shadow0 8px 30px rgba(255,215,64,.4)}
+.particles{positionfixed;top0;left0;width100%;height100%;pointer-eventsnone;z-index99}
+@keyframes fadeIn{from{opacity0}to{opacity1}}
+@keyframes cardIn{from{opacity0;transformtranslateY(20px) scale(.9)}to{opacity1;transformtranslateY(0) scale(1)}}
+@keyframes modalSpin{to{transformrotate(360deg)}}
+@media(max-width680px){
+  .app{padding10px}
+  header{flex-directioncolumn;padding14px}
+  .case-stage{width280px;height230px}
+  .case-img{width230px}
+  .case-opt{width30%}
+  .case-opt img{width80px;height62px}
+  .inv-grid{grid-template-columnsrepeat(auto-fill,minmax(130px,1fr))}
+  .stat{min-width75px;padding7px 10px}
+  .stat-val{font-size.85rem}
+  .clicker-section{gap14px;padding14px}
+  .activity-feed{topauto;bottom80px;right10px;width200px}
+  .wheel-stage{width260px;height260px}
+  .collection-grid{grid-template-columnsrepeat(auto-fill,minmax(100px,1fr))}
+  .profile-head{flex-directioncolumn;text-aligncenter}
+  .profile-stats{grid-template-columnsrepeat(2,1fr)}
+}
+@media (prefers-reduced-motion reduce){,before,after{animation-duration.01ms !important;transition-duration.01ms !important}}
+style
+head
+body
+div class=app
+  header
+    div class=logo
+      svg class=logo-bottle viewBox=0 0 60 90 xmlns=httpwww.w3.org2000svg aria-hidden=true
+        defs
+          linearGradient id=btl x1=0 y1=0 x2=1 y2=1stop offset=0 stop-color=#d8b4ffstop offset=.5 stop-color=#9b5cffstop offset=1 stop-color=#4c1d95linearGradient
+          linearGradient id=btlHi x1=0 y1=0 x2=0 y2=1stop offset=0 stop-color=#fff stop-opacity=.55stop offset=1 stop-color=#fff stop-opacity=0linearGradient
+        defs
+        rect x=22 y=2 width=16 height=14 rx=2 fill=#2a1050
+        rect x=20 y=14 width=20 height=6 rx=1 fill=#3a1870
+        path d=M18 22 Q18 30 14 38 L14 82 Q14 88 20 88 L40 88 Q46 88 46 82 L46 38 Q42 30 42 22 Z fill=url(#btl)
+        path d=M20 28 Q20 34 17 40 L17 78 Q17 82 20 82 L28 82 L28 28 Z fill=url(#btlHi) opacity=.6
+        rect x=18 y=50 width=24 height=18 rx=2 fill=#1a0a30 opacity=.5
+        text x=30 y=62 font-family=Inter font-size=6 font-weight=700 fill=#d8b4ff text-anchor=middleCHEKUSHKAtext
+      svg
+      CHEKUSHKA spanDROPspan
+    div
+    div class=hdr-right
+      div class=stat-pill luck title=Удача🍀 b id=luckDisplay0%bdiv
+      div class=stat-pill prestige title=Престиж⭐ b id=prestigeDisplay0bdiv
+      button class=btn-nav active data-view=cases📦 КЕЙСЫbutton
+      button class=btn-nav data-view=wheel🎰 КОЛЕСОbutton
+      button class=btn-nav data-view=quests📋 КВЕСТЫbutton
+      button class=btn-nav data-view=collection📚 КОЛЛЕКЦИЯbutton
+      button class=btn-nav data-view=market🛒 РЫНОКbutton
+      button class=btn-nav data-view=profile👤 ПРОФИЛЬbutton
+      button class=btn-icon promo id=btnPromo title=Промокод🎟️button
+      button class=btn-icon id=btnMusic title=Музыка🎵button
+      button class=btn-icon id=btnMute title=Звуки🔊button
+    div
+  header
+
+  div class=view active data-view=cases
+    section class=clicker-section
+      div class=clicker-left id=clickerArea
+        button class=clicker-btn id=clickerBtn aria-label=Кликнуть$button
+        div class=combo-ring id=comboRingdiv
+        div class=combo-display id=comboDisplayx1div
+      div
+      div class=clicker-info
+        div class=clicker-title💰 КЛИКЕРdiv
+        div class=clicker-descДоход b id=clickReward+$1.00b · Комбо до bx5bdiv
+        div class=clicker-stats
+          div class=statdiv class=stat-val id=clicksCount0divdiv class=stat-labelКликовdivdiv
+          div class=statdiv class=stat-val id=clickerEarned$0divdiv class=stat-labelЗаработаноdivdiv
+          div class=statdiv class=stat-val id=balanceDisplay$1,000divdiv class=stat-labelБалансdivdiv
+        div
+        div class=upgrades id=upgradesdiv
+      div
+    section
+    div class=case-select id=caseSelectdiv
+    div class=case-section
+      div class=case-stage id=caseStage
+        div class=case-glow id=caseGlowdiv
+        div class=case-floatimg class=case-img id=caseImg alt=Кейс draggable=false decoding=asyncdiv
+        div class=case-flash id=caseFlashdiv
+      div
+      div class=case-label
+        div class=case-name id=caseNamediv
+        div class=case-price id=casePricediv
+      div
+      div class=odds-bar id=oddsBardiv
+      button class=btn-open id=btnOpenbutton
+    div
+    div class=roulette-section id=rouletteSection
+      div class=roulette-pointerdiv
+      div class=roulette-track id=rouletteTrackdiv
+    div
+  div
+
+  div class=view data-view=wheel
+    div class=section-title🎰 КОЛЕСО ФОРТУНЫ span class=sub· бесплатное вращение раз в 5 минутspandiv
+    div class=card
+      div class=wheel-wrap
+        div class=wheel-stage
+          div class=wheel-pointerdiv
+          canvas class=wheel-canvas id=wheelCanvas width=320 height=320canvas
+        div
+        div class=wheel-info
+          div style=font-size.9rem;colorvar(--text-dim);margin-bottom10pxСледующее вращение черезdiv
+          div class=wheel-timer id=wheelTimer0000div
+          button class=btn-wheel id=btnSpinWheel🎲 Крутитьbutton
+          div style=margin-top16px;font-size.78rem;colorvar(--text-dim);line-height1.5
+            b style=colorvar(--money)Призыbbr
+            💰 $50–$5000br
+            🍀 +5% удачиbr
+            ⭐ +1 XP множительbr
+            🎁 x2 клик-доход на 60с
+          div
+        div
+      div
+    div
+  div
+
+  div class=view data-view=quests
+    div class=section-title📋 ЕЖЕДНЕВНЫЕ КВЕСТЫ span class=sub· обновляются раз в суткиspandiv
+    div class=grid-2 id=questsGriddiv
+    div style=margin-top20px
+      div class=section-title style=font-size1.1rem🎁 ЕЖЕДНЕВНЫЙ БОНУСdiv
+      div class=card
+        div style=displayflex;justify-contentspace-between;align-itemscenter;gap12px;flex-wrapwrap
+          div
+            div style=font-size.9rem;font-weight700Серия входов span style=colorvar(--legendary) id=streakDisplay0span 🔥div
+            div style=font-size.78rem;colorvar(--text-dim);margin-top4pxЗаходи каждый день — награды растут!div
+          div
+          button class=btn-wheel id=btnClaimDaily disabledЗабратьbutton
+        div
+        div class=daily-streak id=dailyStreak style=margin-top14pxdiv
+      div
+    div
+  div
+
+  div class=view data-view=collection
+    div class=section-title📚 КОЛЛЕКЦИЯ span class=sub id=collProgress00spandiv
+    div class=card style=margin-bottom16px
+      div style=font-size.85rem;colorvar(--text-dim);line-height1.5
+        Собирай все предметы! За полную коллекцию каждой редкости — награда. Полный бонус за 100% коллекции b style=colorvar(--legendary)$50,000b
+      div
+      div id=collBonuses style=margin-top12px;displayflex;gap8px;flex-wrapwrapdiv
+    div
+    div class=collection-grid id=collGriddiv
+  div
+
+  div class=view data-view=market
+    div class=market-header
+      div
+        div class=market-title🛒 ЧЁРНЫЙ РЫНОКdiv
+        div class=market-subПокупай у ботов напрямую. Цены фиксированы, но ассортимент уникальный.div
+      div
+    div
+    div class=bots-grid id=botsGriddiv
+  div
+
+  div class=view data-view=profile
+    div class=section-title👤 ПРОФИЛЬ ИГРОКАdiv
+    div class=profile-head
+      div class=profile-avatar id=profileAvatar🎖️div
+      div class=profile-info
+        div class=profile-name id=profileNameИгрокdiv
+        div class=profile-rank id=profileRankНовичокdiv
+        div class=profile-balance-big id=profileBalance$0.00div
+      div
+    div
+    div class=profile-stats id=profileStatsdiv
+    div class=history-section
+      div class=history-head
+        div class=history-title📜 ИСТОРИЯ ДЕЙСТВИЙ span class=sub id=historyCount(0)spandiv
+        button class=btn-clear-history id=btnClearHistory🗑 Очиститьbutton
+      div
+      div class=history-list id=historyList
+        div class=history-emptyИстория пуста. Начни играть!div
+      div
+    div
+  div
+
+  div class=inventory-section
+    div class=inv-header
+      div class=inv-title🎒 Инвентарь (span id=invCount0span) span class=inv-total id=invTotalspandiv
+      button class=btn-sell-all id=btnSellAll style=displaynoneПродать всёbutton
+    div
+    div class=inv-grid id=invGrid
+      div class=empty-invИнвентарь пуст. Откройте кейс!div
+    div
+  div
+div
+
+div class=modal-overlay id=modalOverlay
+  div class=modal
+    div class=modal-content
+      div class=won-label id=wonLabelВы получилиdiv
+      div class=won-img-wrap id=modalImgWrapimg class=won-img id=modalImg alt= decoding=asyncdiv
+      div class=won-name id=modalNamediv
+      div class=won-rarity id=modalRaritydiv
+      div class=won-price id=modalPricediv
+      div id=modalDoubleWrap style=displaynone
+        div class=double-choices
+          button class=btn-double take id=btnTake💰 Забратьbutton
+          button class=btn-double risk id=btnRisk🎲 x2 или потерятьbutton
+        div
+        div class=double-oddsШанс успеха b id=doubleOdds50%bdiv
+      div
+      button class=btn-close-modal id=btnCloseModal style=margin-top14pxЗабратьbutton
+    div
+  div
+div
+
+div class=modal-overlay id=dailyOverlay
+  div class=modal daily-modal
+    div class=modal-content
+      div style=font-size2.5rem;margin-bottom8px🎁div
+      div class=won-labelЕЖЕДНЕВНЫЙ БОНУСdiv
+      div style=font-size1.2rem;font-weight700;colorvar(--legendary);margin8px 0Серия span id=dailyStreakModal0span 🔥div
+      div style=font-size.85rem;colorvar(--text-dim);margin-bottom12pxНаграда дня b style=colorvar(--money);font-size1.2rem id=dailyRewardModal$0bdiv
+      button class=btn-close-modal id=btnClaimDailyModalЗабрать наградуbutton
+    div
+  div
+div
+
+div class=modal-overlay id=promoOverlay
+  div class=modal promo-modal
+    div class=modal-content
+      div class=promo-icon🎟️div
+      div class=promo-titleПРОМОКОДdiv
+      div class=promo-descВведи секретный код и получи награду!brУ каждого кода есть ограничения по использованию.div
+      div class=promo-input-wrap
+        input type=text class=promo-input id=promoInput placeholder=ВВЕДИ КОД maxlength=32 autocomplete=off spellcheck=false
+      div
+      button class=btn-activate id=btnActivatePromo🎁 АКТИВИРОВАТЬbutton
+      div id=promoResultdiv
+      div class=promo-used id=promoUseddiv
+      button class=btn-close-modal id=btnClosePromo style=margin-top14px;padding10px 30px;font-size.85remЗакрытьbutton
+    div
+  div
+div
+
+div class=activity-feed id=activityFeeddiv
+div class=toast id=toastdiv
+canvas class=particles id=particleCanvascanvas
+
+script
+const B='httpsimage.qwenlm.aipublic_source8f8de562-0e8d-4d54-b03d-a495de702f98';
+const DRINKS={
+ waterB+1ab4ab9c6-0838-4b62-b990-4b2b54654e16.png,
+ compoteB+1b5bbbc83-4eb2-4e1b-88b8-a5cfe1d3f3ed.png,
+ colaB+1070744d0-f791-4b8e-8222-51fd97865621.png,
+ kvassB+163d4a4b0-9ca6-409c-8003-9d7f56169754.png,
+ chekushkaB+1941f0033-4f3a-4fd9-872a-a0f11a6fddce.png
+};
+const ITEMS1=[
+ {nameВода «Кристальная»,imgDRINKS.water,raritycommon,chance45.5,minP5,maxP20},
+ {nameКомпот «Бабушкин»,imgDRINKS.compote,rarityrare,chance30,minP40,maxP120},
+ {nameКока-Кола «Классик»,imgDRINKS.cola,rarityepic,chance14,minP150,maxP400},
+ {nameКвас «Бочковой»,imgDRINKS.kvass,raritymythic,chance7.5,minP600,maxP1500},
+ {nameЧекушка «Юбилейная»,imgDRINKS.chekushka,raritylegendary,chance3,minP2000,maxP6000}
+];
+const ITEMS2=[
+ {nameКомпот «Бабушкин»,imgDRINKS.compote,rarityrare,chance41,minP100,maxP250},
+ {nameКока-Кола «Классик»,imgDRINKS.cola,rarityepic,chance33,minP350,maxP800},
+ {nameКвас «Бочковой»,imgDRINKS.kvass,raritymythic,chance20,minP1200,maxP3000},
+ {nameЧекушка «Юбилейная»,imgDRINKS.chekushka,raritylegendary,chance6,minP5000,maxP15000}
+];
+const ITEMS3=[
+ {nameКомпот «Бабушкин»,imgDRINKS.compote,rarityrare,chance30,minP200,maxP500},
+ {nameКока-Кола «Классик»,imgDRINKS.cola,rarityepic,chance35,minP700,maxP1500},
+ {nameКвас «Бочковой»,imgDRINKS.kvass,raritymythic,chance25,minP2000,maxP5000},
+ {nameЧекушка «Юбилейная»,imgDRINKS.chekushka,raritylegendary,chance10,minP10000,maxP25000}
+];
+const ITEMS4=[
+ {nameКомпот «Бабушкин»,imgDRINKS.compote,rarityrare,chance20,minP300,maxP700},
+ {nameКока-Кола «Классик»,imgDRINKS.cola,rarityepic,chance35,minP1000,maxP2200},
+ {nameКвас «Бочковой»,imgDRINKS.kvass,raritymythic,chance30,minP3000,maxP7000},
+ {nameЧекушка «Юбилейная»,imgDRINKS.chekushka,raritylegendary,chance15,minP15000,maxP40000}
+];
+const ITEMS5=[
+ {nameКвас «Олимпийский»,imgDRINKS.kvass,raritymythic,chance35,minP4000,maxP9000},
+ {nameКвас «Божественный»,imgDRINKS.kvass,raritymythic,chance25,minP5000,maxP12000},
+ {nameКвас «Нектар Богов»,imgDRINKS.kvass,raritymythic,chance15,minP6000,maxP15000},
+ {nameЧекушка «Золотая»,imgDRINKS.chekushka,raritylegendary,chance10,minP18000,maxP35000},
+ {nameЧекушка «Императорская»,imgDRINKS.chekushka,raritylegendary,chance8,minP22000,maxP45000},
+ {nameЧекушка «Космическая»,imgDRINKS.chekushka,raritylegendary,chance5,minP28000,maxP60000},
+ {nameЧекушка «Вечная»,imgDRINKS.chekushka,raritylegendary,chance2,minP40000,maxP100000}
+];
+const CASES=[
+ {nameВОЕННЫЙ КЕЙС «АРСЕНАЛ»,price100,itemsITEMS1,style'',tag'',
+  closedB+16dafe585-34b6-4419-accd-af7a43735438.png,openB+1e9f060dd-721e-41d8-b579-e04878a14069.png,
+  glowrgba(150,90,255,.16),glowHotrgba(200,140,255,.4)},
+ {nameЭЛИТНЫЙ КЕЙС «ЗОЛОТОЙ РЕЗЕРВ»,price350,itemsITEMS2,style'premium',tag'ЭЛИТА',
+  closedB+13ac61578-00a6-4576-b737-0fca1c16db43.png,openB+1354898f2-b861-4ba6-8e7b-8a12b72aad4c.png,
+  glowrgba(255,215,64,.16),glowHotrgba(255,215,64,.38)},
+ {nameЛЕГЕНДАРНЫЙ КЕЙС «КРАСНЫЙ КОД»,price500,itemsITEMS3,style'legend',tag'ЛЕГЕНДА',tagClass'red',btn'red',
+  closedB+1427a1edd-b40a-4bc4-8ea3-0f33ecee82f8.png,openB+1c9230175-f5d5-4ace-be30-eb59599eafcc.png,
+  glowrgba(255,70,50,.17),glowHotrgba(255,90,60,.42)},
+ {nameУЛЬТРА КЕЙС «НЕОН»,price750,itemsITEMS4,style'ultra',tag'УЛЬТРА',tagClass'cyan',btn'cyan',
+  closedB+13ac61578-00a6-4576-b737-0fca1c16db43.png,openB+1354898f2-b861-4ba6-8e7b-8a12b72aad4c.png,
+  glowrgba(0,229,255,.18),glowHotrgba(0,229,255,.45),hue180},
+ {nameБОЖЕСТВЕННЫЙ СУНДУК «ОЛИМП»,price1250,itemsITEMS5,style'divine',tag'БОЖЕСТВЕННЫЙ',tagClass'divine',btn'divine',
+  closedB+13ac61578-00a6-4576-b737-0fca1c16db43.png,openB+1354898f2-b861-4ba6-8e7b-8a12b72aad4c.png,
+  glowrgba(255,107,255,.2),glowHotrgba(255,107,255,.5),hue280}
+];
+const ALL_ITEMS=[...new Map([...ITEMS1,...ITEMS2,...ITEMS3,...ITEMS4,...ITEMS5].map(i=[i.name,i])).values()];
+const BOTS=[
+ {id'vasya',name'Сержант Вася',rank'Рядовой торговец',avatar'👨‍✈️',items[
+  {nameВода «Святая»,imgDRINKS.water,raritycommon,price15},
+  {nameКомпот «Домашний»,imgDRINKS.compote,rarityrare,price90},
+  {nameКока-Кола «Вишня»,imgDRINKS.cola,rarityepic,price320}
+ ]},
+ {id'petr',name'Капитан Пётр',rank'Опытный барыга',avatar'🧔',items[
+  {nameКомпот «Бабушкин»,imgDRINKS.compote,rarityrare,price140},
+  {nameКока-Кола «Классик»,imgDRINKS.cola,rarityepic,price480},
+  {nameКвас «Острый»,imgDRINKS.kvass,raritymythic,price1800}
+ ]},
+ {id'oleg',name'Майор Олег',rank'Контрабанда',avatar'🕵️',items[
+  {nameКока-Кола «Заморская»,imgDRINKS.cola,rarityepic,price550},
+  {nameКвас «Бочковой»,imgDRINKS.kvass,raritymythic,price2200},
+  {nameЧекушка «Солдатская»,imgDRINKS.chekushka,raritylegendary,price8500}
+ ]},
+ {id'ivan',name'Генерал Иван',rank'Теневой дилер',avatar'🎖️',items[
+  {nameКвас «Царский»,imgDRINKS.kvass,raritymythic,price3500},
+  {nameЧекушка «Юбилейная»,imgDRINKS.chekushka,raritylegendary,price12000},
+  {nameЧекушка «Золотая»,imgDRINKS.chekushka,raritylegendary,price18000}
+ ]},
+ {id'marusya',name'Маруся-Торговка',rank'Рыночная королева',avatar'👩',items[
+  {nameВода «Ледяная»,imgDRINKS.water,raritycommon,price12},
+  {nameКомпот «Ягодный»,imgDRINKS.compote,rarityrare,price110},
+  {nameКока-Кола «Ваниль»,imgDRINKS.cola,rarityepic,price420},
+  {nameКвас «Хреновый»,imgDRINKS.kvass,raritymythic,price2500}
+ ]},
+ {id'ded',name'Дед Михалыч',rank'Легенда рынка',avatar'👴',items[
+  {nameЧекушка «Дедовская»,imgDRINKS.chekushka,raritylegendary,price15000},
+  {nameЧекушка «Царская»,imgDRINKS.chekushka,raritylegendary,price22000},
+  {nameЧекушка «Императорская»,imgDRINKS.chekushka,raritylegendary,price35000}
+ ]}
+];
+const UPGRADES=[
+ {level1,reward1,cost0,name'Базовый'},
+ {level2,reward1.5,cost150,name'Улучшенный'},
+ {level3,reward2.5,cost500,name'Продвинутый'},
+ {level4,reward4,cost1500,name'Мастерский'},
+ {level5,reward7,cost5000,name'Легендарный'}
+];
+const RARITY_COLORS={common'#b0b8c8',rare'#ab47bc',epic'#ff7043',mythic'#e935ff',legendary'#ffd740'};
+const RARITY_NAMES={common'Обычное',rare'Редкое',epic'Эпическое',mythic'Мифическое',legendary'Легендарное'};
+const RARITY_ORDER=['common','rare','epic','mythic','legendary'];
+const RARITY_BG={
+ common'linear-gradient(160deg,#262433,#1c1a28)',
+ rare'linear-gradient(160deg,#2a1636,#1e1026)',
+ epic'linear-gradient(160deg,#3a1a12,#2a120c)',
+ mythic'linear-gradient(160deg,#33103a,#240b2a)',
+ legendary'linear-gradient(160deg,#3a3012,#2a220c)'
+};
+const FAKE_USERS=['xXProGamerXx','ЧекушкаМан','Дед_inside','Вася228','КваснойБарон','КолаЛав','Мажор_Олег','Маруся_Т','Легенда_47','NoobSlayer','Пётр_Капитан','ЧекушкаKing','DropMaster','Иван_Генерал','Рандомщик','Азартный_Игрок','КейсМэн','БаблГум','Счастливчик777','ТопЧел'];
+const QUEST_TEMPLATES=[
+ {id'open_cases',title'Открой кейсы',desc'Открой N кейсов',target5,reward200,icon'📦',stat'opened'},
+ {id'clicks',title'Кликер-мастер',desc'Сделай N кликов',target100,reward150,icon'👆',stat'clicks'},
+ {id'earn',title'Заработок',desc'Заработай $N',target1000,reward300,icon'💰',stat'earned'},
+ {id'sell',title'Распродажа',desc'Продай N предметов',target10,reward250,icon'💸',stat'sold'},
+ {id'buy',title'Шоппинг',desc'Купи N предметов на рынке',target3,reward200,icon'🛒',stat'bought'},
+ {id'rare_drop',title'Редкая удача',desc'Получи N редких+ предметов',target2,reward400,icon'💜',stat'rareDrops'},
+ {id'combo',title'Комбо-мастер',desc'Достигни комбо xN',target3,reward300,icon'⚡',stat'maxCombo'}
+];
+const WHEEL_PRIZES=[
+ {label'$50',type'money',value50,color'#7c3aed'},
+ {label'$200',type'money',value200,color'#5b21b6'},
+ {label'+5% удачи',type'luck',value5,color'#4ade80'},
+ {label'$500',type'money',value500,color'#9b5cff'},
+ {label'x2 клики 60с',type'boost',value60,color'#ff7043'},
+ {label'$1000',type'money',value1000,color'#ab47bc'},
+ {label'+10% удачи',type'luck',value10,color'#6ee06e'},
+ {label'$5000',type'money',value5000,color'#e935ff'}
+];
+const PROMO_CODES={
+ 'che1us02ka'{
+  maxUses1,
+  reward()={
+   const items=[];
+   for(let i=0;i10;i++){
+    const price=+(2000+Math.random()4000).toFixed(2);
+    items.push({nameЧекушка «Юбилейная»,imgDRINKS.chekushka,raritylegendary,priceprice,id++itemIdCounter});
+   }
+   const totalValue=items.reduce((s,i)=s+i.price,0);
+   return{
+    title'🍾 10 ЛЕГЕНДАРНЫХ ЧЕКУШЕК!',
+    detail`Ты получил b10 чекушек «Юбилейных»b легендарной редкости!brОбщая стоимость b style=colorvar(--legendary)${fmt(totalValue)}b`,
+    itemsitems,
+    money0
+   };
+  }
+ }
+};
+const SAVE_KEY='chekushka_drop_save_v8';
+const MAX_HISTORY=100;
+const Save={
+ saveTimernull,
+ schedule(){if(this.saveTimer)return;this.saveTimer=setTimeout(()={this.saveTimer=null;this.save()},400)},
+ build(){return{
+  v8,balance,clicks,clickerEarned,itemIdCounter,selectedCase,currentView,
+  xp,level,clickerLevel,luck,prestige,
+  stats{...stats},
+  inventoryinventory.map(i=({ni.name,ii.img,ri.rarity,pi.price,idi.id})),
+  collection{...collection},
+  questsquests.map(q=({idq.id,progressq.progress,claimedq.claimed})),
+  questsSeed,questsDay,
+  lastWheelSpin,wheelBoostEnd,
+  dailyStreak,lastDailyDay,
+  historyhistory.slice(0,MAX_HISTORY),
+  playerName,
+  usedPromos[...usedPromos],
+  promoActivations{...promoActivations},
+  tsDate.now()
+ }},
+ save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(this.build()))}catch(e){}},
+ load(){try{const raw=localStorage.getItem(SAVE_KEY);if(!raw)return null;const d=JSON.parse(raw);if(!dtypeof d!=='object')return null;if(typeof d.balance!=='number')return null;return d}catch(e){return null}},
+ apply(d){
+  if(!d)return false;
+  balance=+d.balance1000;clicks=+d.clicks0;clickerEarned=+d.clickerEarned0;
+  itemIdCounter=+d.itemIdCounter0;selectedCase=+d.selectedCase0;
+  xp=+d.xp0;level=+d.level1;clickerLevel=+d.clickerLevel1;
+  luck=+d.luck0;prestige=+d.prestige0;
+  if(typeof d.playerName==='string'&&d.playerName)playerName=d.playerName;
+  if(selectedCase0selectedCase=CASES.length)selectedCase=0;
+  if(d.stats&&typeof d.stats==='object'){
+   stats.opened=+d.stats.opened0;stats.spent=+d.stats.spent0;stats.earned=+d.stats.earned0;
+   stats.bought=+d.stats.bought0;stats.sold=+d.stats.sold0;stats.contracts=+d.stats.contracts0;
+   stats.rareDrops=+d.stats.rareDrops0;stats.maxCombo=+d.stats.maxCombo0;
+   stats.critHits=+d.stats.critHits0;stats.doubleWins=+d.stats.doubleWins0;stats.doubleLosses=+d.stats.doubleLosses0;
+   stats.wheelSpins=+d.stats.wheelSpins0;stats.questsDone=+d.stats.questsDone0;
+   stats.promosUsed=+d.stats.promosUsed0;
+  }
+  if(Array.isArray(d.inventory)){inventory=d.inventory.filter(it=it&&it.n&&it.i&&it.r&&typeof it.p==='number').map(it=({nameit.n,imgit.i,rarityit.r,price+it.p,id+it.id++itemIdCounter}))}
+  if(d.collection&&typeof d.collection==='object'){for(const k in d.collection)collection[k]=+d.collection[k]0}
+  if(Array.isArray(d.quests)){d.quests.forEach(sq={const q=quests.find(x=x.id===sq.id);if(q){q.progress=+sq.progress0;q.claimed=!!sq.claimed}})}
+  if(Array.isArray(d.history))history=d.history.slice(0,MAX_HISTORY);
+  if(Array.isArray(d.usedPromos))usedPromos=d.usedPromos.slice();
+  if(d.promoActivations&&typeof d.promoActivations==='object'){for(const k in d.promoActivations)promoActivations[k]=+d.promoActivations[k]0}
+  if(typeof d.questsSeed==='number')questsSeed=d.questsSeed;
+  if(typeof d.questsDay==='number')questsDay=d.questsDay;
+  if(typeof d.lastWheelSpin==='number')lastWheelSpin=d.lastWheelSpin;
+  if(typeof d.wheelBoostEnd==='number')wheelBoostEnd=d.wheelBoostEnd;
+  if(typeof d.dailyStreak==='number')dailyStreak=d.dailyStreak;
+  if(typeof d.lastDailyDay==='number')lastDailyDay=d.lastDailyDay;
+  return true;
+ }
+};
+addEventListener('beforeunload',()=Save.save(),{passivetrue});
+addEventListener('visibilitychange',()={if(document.visibilityState==='hidden')Save.save()});
+let history=[];
+function addHistory(entry){
+ history.unshift({...entry,tsDate.now()});
+ if(history.lengthMAX_HISTORY)history.length=MAX_HISTORY;
+ Save.schedule();
+ if(currentView==='profile')renderProfile();
+}
+function clearHistory(){
+ if(!history.length)return;
+ if(!confirm('Очистить всю историю действий'))return;
+ history=[];
+ Save.schedule();
+ renderProfile();
+ showToast('🗑 История очищена');
+}
+
+ ================================================================ 
+ ===== ЗВУКИ — УЛУЧШЕННАЯ ВЕРСИЯ (как в CSGOPUBG кейсах) ===== 
+ ================================================================ 
+
+  Принципы
+   - Богатые многослойные тембры (несколько осцилляторов)
+   - Дорогие звуки — с яркими обертонами
+   - Приятные поп-эффекты с мягким атаком
+   - Фанфары для редких предметов
+   - Приятный ка-чинг для монет
+
+const SFX={
+ ctxnull,masternull,mutedfalse,convnull,drynull,wetnull,
+ makeIR(duration=2.8,decay=2.0){
+  const rate=this.ctx.sampleRate;const len=rateduration;
+  const ir=this.ctx.createBuffer(2,len,rate);
+  for(let ch=0;ch2;ch++){
+   const d=ir.getChannelData(ch);
+   for(let i=0;ilen;i++){
+    const t=irate;
+    const env=Math.exp(-tdecay);
+    const early=t0.081.81;
+     Добавляем лёгкую модуляцию для живости реверба 
+    const mod=1+0.15Math.sin(t12);
+    d[i]=(Math.random()2-1)envearlymod;
+   }
+  }
+  return ir;
+ },
+ init(){
+  if(!this.ctx){const AC=window.AudioContextwindow.webkitAudioContext;if(!AC)return;this.ctx=new AC();
+    Мастер-компрессор для ровной громкости 
+   this.compressor=this.ctx.createDynamicsCompressor();
+   this.compressor.threshold.value=-20;
+   this.compressor.knee.value=20;
+   this.compressor.ratio.value=3;
+   this.compressor.attack.value=0.005;
+   this.compressor.release.value=0.15;
+   
+   this.master=this.ctx.createGain();this.master.gain.value=0.85;
+   
+    Тёплый lowpass — срезаем только самые верхние 
+   const lp=this.ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3200;lp.Q.value=0.3;
+   
+    Реверб 
+   this.conv=this.ctx.createConvolver();this.conv.buffer=this.makeIR(2.8,2.0);
+   this.dry=this.ctx.createGain();this.dry.gain.value=0.88;
+   this.wet=this.ctx.createGain();this.wet.gain.value=0.35;
+   
+   this.master.connect(lp);
+   lp.connect(this.dry);
+   lp.connect(this.conv);
+   this.conv.connect(this.wet);
+   this.dry.connect(this.compressor);
+   this.wet.connect(this.compressor);
+   this.compressor.connect(this.ctx.destination);
+  }
+  if(this.ctx.state==='suspended')this.ctx.resume();
+ },
+ t(){return this.ctx.currentTime},
+ 
+  Универсальный насыщенный тон с несколькими гармониками 
+ richTone(freq,dur,vol=0.25,delay=0,type='sine'){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t()+delay;
+   Основная частота 
+  const o1=this.ctx.createOscillator();o1.type=type;o1.frequency.value=freq;
+   Вторая гармоника (октава выше, тихо) 
+  const o2=this.ctx.createOscillator();o2.type='sine';o2.frequency.value=freq2;
+  const g2=this.ctx.createGain();g2.gain.value=0.15;
+   Третья гармоника (квинта, очень тихо) 
+  const o3=this.ctx.createOscillator();o3.type='sine';o3.frequency.value=freq1.5;
+  const g3=this.ctx.createGain();g3.gain.value=0.08;
+  
+  const g=this.ctx.createGain();
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(vol,t0+0.015);
+  g.gain.setValueAtTime(vol0.9,t0+dur0.2);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  
+  o1.connect(g);o2.connect(g2);g2.connect(g);o3.connect(g3);g3.connect(g);
+  g.connect(this.master);
+  o1.start(t0);o2.start(t0);o3.start(t0);
+  o1.stop(t0+dur+0.05);o2.stop(t0+dur+0.05);o3.stop(t0+dur+0.05);
+ },
+ 
+  Pop — щелчок с ярким хвостом (как в CSGO при клике) 
+ pop(freq=440,vol=0.28,delay=0){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t()+delay;
+   Основной тон с быстрым pitch-slide 
+  const o=this.ctx.createOscillator();o.type='sine';
+  o.frequency.setValueAtTime(freq1.8,t0);
+  o.frequency.exponentialRampToValueAtTime(freq,t0+0.04);
+  o.frequency.exponentialRampToValueAtTime(freq0.85,t0+0.18);
+  const g=this.ctx.createGain();
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(vol,t0+0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+0.35);
+   Щелчок (короткий шум) 
+  const click=this.ctx.createOscillator();click.type='triangle';
+  click.frequency.setValueAtTime(freq4,t0);
+  click.frequency.exponentialRampToValueAtTime(freq2,t0+0.015);
+  const gc=this.ctx.createGain();
+  gc.gain.setValueAtTime(vol0.4,t0);
+  gc.gain.exponentialRampToValueAtTime(0.0001,t0+0.025);
+  
+  o.connect(g);g.connect(this.master);
+  click.connect(gc);gc.connect(this.master);
+  o.start(t0);o.stop(t0+0.4);
+  click.start(t0);click.stop(t0+0.03);
+ },
+ 
+  Thud — глубокий удар (открытие кейса) 
+ thud(freq=80,vol=0.35,delay=0){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t()+delay;
+  const o=this.ctx.createOscillator();o.type='sine';
+  o.frequency.setValueAtTime(freq2,t0);
+  o.frequency.exponentialRampToValueAtTime(freq,t0+0.1);
+  const g=this.ctx.createGain();
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(vol,t0+0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+0.55);
+   Шумовой хруст 
+  this._noise(0.18,vol0.35,600,0.7,delay);
+   Щелчок 
+  const click=this.ctx.createOscillator();click.type='square';
+  click.frequency.value=freq6;
+  const gc=this.ctx.createGain();
+  gc.gain.setValueAtTime(vol0.2,t0);
+  gc.gain.exponentialRampToValueAtTime(0.0001,t0+0.015);
+  click.connect(gc);gc.connect(this.master);
+  click.start(t0);click.stop(t0+0.02);
+  
+  o.connect(g);g.connect(this.master);
+  o.start(t0);o.stop(t0+0.6);
+ },
+ 
+  Liquid — звук наливающейся жидкости 
+ liquid(dur=0.8,vol=0.18,delay=0){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t()+delay;
+  const len=Math.max(1,Math.floor(this.ctx.sampleRatedur));
+  const buf=this.ctx.createBuffer(1,len,this.ctx.sampleRate);
+  const d=buf.getChannelData(0);
+  for(let i=0;ilen;i++){
+   const t=ithis.ctx.sampleRate;
+    Пузырьки 
+   const mod=0.5+0.5Math.sin(t50+Math.sin(t23)4);
+    Второй слой пузырьков 
+   const mod2=0.3+0.3Math.sin(t80+Math.sin(t37)3);
+   d[i]=(Math.random()2-1)(mod+mod2)0.6;
+  }
+  const src=this.ctx.createBufferSource();src.buffer=buf;
+  const f=this.ctx.createBiquadFilter();f.type='bandpass';
+  f.frequency.setValueAtTime(350,t0);
+  f.frequency.linearRampToValueAtTime(800,t0+dur);
+  f.Q.value=2.5;
+  const g=this.ctx.createGain();
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(vol,t0+0.06);
+  g.gain.linearRampToValueAtTime(vol0.7,t0+dur0.7);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  src.connect(f);f.connect(g);g.connect(this.master);
+  src.start(t0);src.stop(t0+dur+0.1);
+ },
+ 
+  Swish — свистразрезание 
+ swish(dur=0.6,vol=0.22,delay=0){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t()+delay;
+  const len=Math.max(1,Math.floor(this.ctx.sampleRatedur));
+  const buf=this.ctx.createBuffer(1,len,this.ctx.sampleRate);
+  const d=buf.getChannelData(0);
+  for(let i=0;ilen;i++)d[i]=Math.random()2-1;
+  const src=this.ctx.createBufferSource();src.buffer=buf;
+  const f=this.ctx.createBiquadFilter();f.type='bandpass';
+  f.frequency.setValueAtTime(2800,t0);
+  f.frequency.exponentialRampToValueAtTime(400,t0+dur);
+  f.Q.value=1.8;
+  const g=this.ctx.createGain();
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(vol,t0+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  src.connect(f);f.connect(g);g.connect(this.master);
+  src.start(t0);src.stop(t0+dur+0.1);
+ },
+ 
+  Clink — звон стекламеталла (многослойный) 
+ clink(vol=0.2,delay=0){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t()+delay;
+   Множество частот для богатого тембра 
+  [523,784,1046,1568,2093].forEach((fr,i)={
+   const o=this.ctx.createOscillator();o.type='sine';o.frequency.value=fr;
+   const g=this.ctx.createGain();
+   const v=vol(1-i0.18);
+   g.gain.setValueAtTime(0,t0);
+   g.gain.linearRampToValueAtTime(v,t0+0.004);
+   g.gain.exponentialRampToValueAtTime(0.0001,t0+0.45);
+   o.connect(g);g.connect(this.master);
+   o.start(t0);o.stop(t0+0.5);
+  });
+ },
+ 
+  Cash — звук монеткассиры (ka-ching!) 
+ cash(vol=0.3,delay=0){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t()+delay;
+   Ka — первый щелчок 
+  this.pop(880,vol0.6,t0);
+   Ching — звон 
+  setTimeout(()={
+   if(!this.ctxthis.muted)return;
+   const t1=this.ctx.currentTime;
+   [1318,1568,2093,2637].forEach((fr,i)={
+    const o=this.ctx.createOscillator();o.type='sine';o.frequency.value=fr;
+    const g=this.ctx.createGain();
+    g.gain.setValueAtTime(0,t1);
+    g.gain.linearRampToValueAtTime(vol(0.25-i0.04),t1+0.005);
+    g.gain.exponentialRampToValueAtTime(0.0001,t1+0.6);
+    o.connect(g);g.connect(this.master);
+    o.start(t1);o.stop(t1+0.65);
+   });
+  },80);
+ },
+ 
+  Fanfare — фанфары для легендарных 
+ fanfare(){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t();
+   Восходящая арпеджио мажорного трезвучия 
+  const notes=[392,494,587,784,988,1175,1568];
+  notes.forEach((f,i)={
+   this.richTone(f,1.2,0.22,i0.09,'sine');
+  });
+   Финальный аккорд 
+  setTimeout(()={
+   if(!this.ctxthis.muted)return;
+   const t1=this.ctx.currentTime;
+   [523,659,784,1046,1318].forEach(f={
+    const o=this.ctx.createOscillator();o.type='sine';o.frequency.value=f;
+    const g=this.ctx.createGain();
+    g.gain.setValueAtTime(0,t1);
+    g.gain.linearRampToValueAtTime(0.2,t1+0.04);
+    g.gain.exponentialRampToValueAtTime(0.0001,t1+1.8);
+    o.connect(g);g.connect(this.master);
+    o.start(t1);o.stop(t1+1.85);
+   });
+   this.clink(0.25,0.1);
+  },700);
+ },
+ 
+  Promo Fanfare — праздничная фанфара 
+ promoFanfare(){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t();
+   Яркая восходящая мелодия 
+  const melody=[523,659,784,1046,784,1046,1318,1568];
+  melody.forEach((f,i)={
+   this.richTone(f,0.6,0.25,i0.1,'triangle');
+  });
+  setTimeout(()={
+   if(!this.ctxthis.muted)return;
+   const t1=this.ctx.currentTime;
+   [523,659,784,1046].forEach(f={
+    const o=this.ctx.createOscillator();o.type='sine';o.frequency.value=f;
+    const g=this.ctx.createGain();
+    g.gain.setValueAtTime(0,t1);
+    g.gain.linearRampToValueAtTime(0.22,t1+0.03);
+    g.gain.exponentialRampToValueAtTime(0.0001,t1+1.5);
+    o.connect(g);g.connect(this.master);
+    o.start(t1);o.stop(t1+1.55);
+   });
+   this.clink(0.25,0.15);
+  },900);
+ },
+ 
+  Level Up — приятный звук повышения 
+ levelUp(){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t();
+  [523,659,784,1046].forEach((f,i)={
+   this.richTone(f,0.8,0.2,i0.12,'sine');
+  });
+  this.clink(0.15,0.5);
+ },
+ 
+  Success — успех (для квестов) 
+ success(){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t();
+  this.richTone(659,0.5,0.22,0,'sine');
+  this.richTone(784,0.5,0.2,0.1,'sine');
+  this.richTone(1046,0.8,0.22,0.2,'sine');
+  this.clink(0.15,0.3);
+ },
+ 
+  Error — ошибка (мягкий, не раздражающий) 
+ error(){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t();
+  const o=this.ctx.createOscillator();o.type='sine';
+  o.frequency.setValueAtTime(220,t0);
+  o.frequency.exponentialRampToValueAtTime(110,t0+0.3);
+  const g=this.ctx.createGain();
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(0.25,t0+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+0.4);
+  o.connect(g);g.connect(this.master);
+  o.start(t0);o.stop(t0+0.45);
+  this._noise(0.15,0.08,400,0.5,0);
+ },
+ 
+  Crit — критический удар 
+ crit(){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t();
+   Яркий взрыв 
+  this.richTone(880,0.4,0.3,0,'sawtooth');
+  this.richTone(1320,0.3,0.2,0.05,'sine');
+  this.richTone(1760,0.25,0.15,0.1,'sine');
+  this._noise(0.2,0.15,1500,1,0);
+  setTimeout(()={
+   if(!this.ctxthis.muted)return;
+   this.clink(0.2,0);
+  },150);
+ },
+ 
+ _noise(dur,vol,freq=800,q=0.6,delay=0){
+  if(!this.ctxthis.muted)return;
+  const t0=this.t()+delay;
+  const len=Math.max(1,Math.floor(this.ctx.sampleRatedur));
+  const buf=this.ctx.createBuffer(1,len,this.ctx.sampleRate);
+  const d=buf.getChannelData(0);
+  for(let i=0;ilen;i++)d[i]=Math.random()2-1;
+  const src=this.ctx.createBufferSource();src.buffer=buf;
+  const f=this.ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=freq;f.Q.value=q;
+  const g=this.ctx.createGain();
+  g.gain.setValueAtTime(0,t0);
+  g.gain.linearRampToValueAtTime(vol,t0+0.015);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  src.connect(f);f.connect(g);g.connect(this.master);
+  src.start(t0);src.stop(t0+dur+0.1);
+ },
+ 
+  === СОБЫТИЙНЫЕ ЗВУКИ === 
+ click(){this.pop(520,0.22);this._noise(0.08,0.04,900,0.5,0.02)},
+ pling(combo=1){
+  const base=330+combo25;
+  this.pop(base,0.22+combo0.02);
+  if(combo=2)this.liquid(0.35,0.09,0.05);
+  if(combo=3)this.richTone(base1.5,0.3,0.1,0.08);
+  if(combo=4)this.clink(0.1,0.1);
+ },
+ buy(){this.clink(0.2);this.thud(140,0.22,0.08);this.liquid(0.5,0.12,0.12)},
+ coin(){this.cash(0.28)},
+ clank(){this.thud(130,0.3);this.swish(0.35,0.15,0.05);this._noise(0.25,0.1,600,0.8,0.1)},
+ whoosh(){this.swish(1.0,0.25);this.pop(200,0.12,0.2)},
+ tick(){this.pop(780,0.08)},
+ reveal(r){
+  if(r==='common'){
+   this.pop(330,0.22);
+   this.liquid(0.6,0.1,0.1);
+  }else if(r==='rare'){
+   this.richTone(392,0.8,0.24,0);
+   this.richTone(494,0.7,0.2,0.12);
+   this.richTone(587,0.6,0.18,0.24);
+   this.clink(0.12,0.35);
+  }else if(r==='epic'){
+   this.richTone(330,1.0,0.26,0);
+   this.richTone(415,0.9,0.22,0.1);
+   this.richTone(494,0.8,0.2,0.2);
+   this.richTone(659,0.7,0.18,0.3);
+   this.clink(0.16,0.4);
+   this.thud(160,0.18,0.5);
+  }else if(r==='mythic'){
+   this.richTone(262,1.2,0.28,0);
+   this.richTone(330,1.1,0.24,0.1);
+   this.richTone(392,1.0,0.22,0.2);
+   this.richTone(523,0.9,0.2,0.3);
+   this.richTone(659,0.8,0.18,0.4);
+   this.clink(0.18,0.5);
+   this.thud(140,0.2,0.7);
+  }else{
+    Легендарный — эпичная фанфара 
+   this.fanfare();
+  }
+ },
+ wheel(){this.pop(600,0.22);this.liquid(0.8,0.12,0.1);this.clink(0.18,0.3)},
+ quest(){this.success()}
+};
+
+ ================================================================ 
+ ===== МУЗЫКА — LO-FI CHILL (популярная спокойная) ============ 
+ ================================================================ 
+
+  Стиль lo-fi hip-hop  chillhop
+  - Мажорная прогрессия Cmaj7 - Am7 - Fmaj7 - G7
+  - Темп ~72 BPM (очень расслабленный)
+  - Мягкие Rhodes-подобные аккорды
+  - Простая мелодия в пентатонике
+  - Лёгкий бас
+  - Тихие хэты
+
+const Music={
+ ontrue,startedfalse,gainnull,delaynull,step0,nextTime0,timernull,
+  Аккорды lo-fi (Cmaj7, Am7, Fmaj7, G7) 
+ CHORDS[
+  [261.63,329.63,392.00,493.88],    Cmaj7 
+  [220.00,261.63,329.63,392.00],    Am7 
+  [174.61,220.00,261.63,349.23],    Fmaj7 
+  [196.00,246.94,293.66,349.23]     G7 
+ ],
+  Простая мелодия в C-мажор пентатонике 
+ MELODY[
+  523.25,587.33,659.25,783.99,659.25,587.33,523.25,493.88,
+  523.25,null,587.33,659.25,587.33,null,523.25,493.88,
+  440.00,523.25,587.33,659.25,587.33,523.25,440.00,null,
+  392.00,440.00,523.25,587.33,523.25,440.00,392.00,null
+ ],
+ BASS[130.81,110.00,87.31,98.00],
+ init(){
+  if(this.started!SFX.ctx)return;
+  this.started=true;
+  const ctx=SFX.ctx;
+  
+   Мастер-гейт музыки (тихий, чтобы не мешал звукам) 
+  this.gain=ctx.createGain();
+  this.gain.gain.value=this.on0.120;
+  
+   Очень тёплый lowpass 
+  const lp=ctx.createBiquadFilter();
+  lp.type='lowpass';
+  lp.frequency.value=1800;
+  lp.Q.value=0.4;
+  
+   Лёгкий chorus-эффект через delay 
+  this.delay=ctx.createDelay(2);
+  this.delay.delayTime.value=0.38;
+  const fb=ctx.createGain();fb.gain.value=0.35;
+  const dw=ctx.createGain();dw.gain.value=0.4;
+  const dlp=ctx.createBiquadFilter();
+  dlp.type='lowpass';dlp.frequency.value=1400;
+  
+  this.delay.connect(dlp);
+  dlp.connect(fb);
+  fb.connect(this.delay);
+  this.delay.connect(dw);
+  dw.connect(this.gain);
+  
+  this.gain.connect(lp);
+  lp.connect(ctx.destination);
+  
+  this.nextTime=ctx.currentTime+0.2;
+  this.timer=setInterval(()=this.schedule(),130);
+ },
+ schedule(){
+  const ctx=SFX.ctx;if(!ctx)return;
+  const spb=60722;  72 BPM, восьмые 
+  while(this.nextTimectx.currentTime+0.5){
+   this.playStep(this.step,this.nextTime,spb);
+   this.nextTime+=spb;
+   this.step++;
+  }
+ },
+ playStep(s,t,spb){
+  const bar=Math.floor(s16)%4;
+  const inBar=s%16;
+  const chord=this.CHORDS[bar];
+  
+   Аккорд ( Rhodes-подобный) — играет на 1-й и 9-й восьмушке 
+  if(inBar===0inBar===8){
+   this.rhodes(chord,t,spb7.5);
+  }
+  
+   Бас — на сильных долях 
+  if(inBar===0){
+   this.bass(this.BASS[bar],t,spb14);
+  }
+  
+   Мелодия — на каждой восьмушке 
+  const note=this.MELODY[s%this.MELODY.length];
+  if(note){
+   this.melody(note,t,spb1.5);
+  }
+  
+   Лёгкие хэты — на чётных восьмушках 
+  if(inBar%2===1){
+   this.hat(t,0.03);
+  }
+ },
+  Rhodes-подобный аккорд (мягкий, с несколькими осцилляторами) 
+ rhodes(freqs,t,dur){
+  const ctx=SFX.ctx;
+  freqs.forEach(f={
+    Основная + тихая октава выше 
+   const o1=ctx.createOscillator();o1.type='sine';o1.frequency.value=f;
+   const o2=ctx.createOscillator();o2.type='sine';o2.frequency.value=f2;
+   const g2=ctx.createGain();g2.gain.value=0.12;
+    Тихая квинта для богатства 
+   const o3=ctx.createOscillator();o3.type='sine';o3.frequency.value=f1.5;
+   const g3=ctx.createGain();g3.gain.value=0.06;
+   
+   const g=ctx.createGain();
+   g.gain.setValueAtTime(0,t);
+   g.gain.linearRampToValueAtTime(0.018,t+0.08);
+   g.gain.setValueAtTime(0.015,t+dur0.3);
+   g.gain.linearRampToValueAtTime(0.008,t+dur0.8);
+   g.gain.linearRampToValueAtTime(0,t+dur);
+   
+   o1.connect(g);o2.connect(g2);g2.connect(g);o3.connect(g3);g3.connect(g);
+   g.connect(this.gain);g.connect(this.delay);
+   o1.start(t);o2.start(t);o3.start(t);
+   o1.stop(t+dur+0.1);o2.stop(t+dur+0.1);o3.stop(t+dur+0.1);
+  });
+ },
+  Простая мелодия 
+ melody(f,t,dur){
+  const ctx=SFX.ctx;
+  const o=ctx.createOscillator();o.type='triangle';o.frequency.value=f;
+  const g=ctx.createGain();
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(0.025,t+0.03);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g);
+  g.connect(this.gain);
+  g.connect(this.delay);
+  o.start(t);o.stop(t+dur+0.05);
+ },
+  Бас 
+ bass(f,t,dur){
+  const ctx=SFX.ctx;
+  const o=ctx.createOscillator();o.type='sine';o.frequency.value=f;
+  const g=ctx.createGain();
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(0.09,t+0.08);
+  g.gain.setValueAtTime(0.07,t+dur0.5);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+  o.connect(g);g.connect(this.gain);
+  o.start(t);o.stop(t+dur+0.1);
+ },
+  Лёгкий хэт 
+ hat(t,vol){
+  const ctx=SFX.ctx;
+  const len=Math.floor(ctx.sampleRate0.04);
+  const buf=ctx.createBuffer(1,len,len);
+  const d=buf.getChannelData(0);
+  for(let i=0;ilen;i++)d[i]=Math.random()2-1;
+  const src=ctx.createBufferSource();src.buffer=buf;
+  const f=ctx.createBiquadFilter();f.type='highpass';f.frequency.value=9000;
+  const g=ctx.createGain();
+  g.gain.setValueAtTime(vol,t);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+0.04);
+  src.connect(f);f.connect(g);g.connect(this.gain);
+  src.start(t);src.stop(t+0.05);
+ },
+ setOn(v){
+  this.on=v;
+  if(v&&!this.started&&SFX.ctx)this.init();
+  if(this.gain&&SFX.ctx)this.gain.gain.setTargetAtTime(v0.120,SFX.ctx.currentTime,0.35);
+ }
+};
+
+const $=id=document.getElementById(id);
+const fmtCache=new Map();
+function fmt(n){const k=n.toFixed(2);let v=fmtCache.get(k);if(v)return v;v='$'+k.replace(B(=(d{3})+(!d))g,',');if(fmtCache.size500)fmtCache.clear();fmtCache.set(k,v);return v}
+function fmtTime(ts){
+ const d=new Date(ts);const now=new Date();const diff=now-d;
+ if(diff60000)return 'только что';
+ if(diff3600000)return Math.floor(diff60000)+' мин назад';
+ if(diff86400000)return Math.floor(diff3600000)+' ч назад';
+ if(diff604800000)return Math.floor(diff86400000)+' дн назад';
+ return d.toLocaleDateString('ru-RU',{day'2-digit',month'short',hour'2-digit',minute'2-digit'});
+}
+const toastEl=$('toast');let toastTimer=null;
+function showToast(msg,type=''){toastEl.textContent=msg;toastEl.className='toast show'+(type' '+type'');if(toastTimer)clearTimeout(toastTimer);toastTimer=setTimeout(()={toastEl.className='toast'},2400)}
+let balance=1000,inventory=[],stats={opened0,spent0,earned0,bought0,sold0,contracts0,rareDrops0,maxCombo0,clicks0,critHits0,doubleWins0,doubleLosses0,wheelSpins0,questsDone0,promosUsed0},isSpinning=false,itemIdCounter=0,selectedCase=0;
+let clicks=0,clickerEarned=0;
+let currentView='cases';
+let xp=0,level=1,clickerLevel=1;
+let luck=0;
+let prestige=0;
+let collection={};
+let quests=[];
+let questsSeed=Date.now();
+let questsDay=0;
+let lastWheelSpin=0;
+let wheelBoostEnd=0;
+let dailyStreak=0;
+let lastDailyDay=0;
+let pendingDoubleItem=null;
+let playerName='Игрок';
+let usedPromos=[];
+let promoActivations={};
+function getIncomeMult(){return 1+prestige0.1}
+function getLuckBonus(){return prestige5}
+function getQuestMult(){return 1+prestige0.2}
+function getTotalLuck(){return luck+getLuckBonus()}
+function xpForNextLevel(l){return l100}
+function addXp(amount){
+ xp+=amount;let needed=xpForNextLevel(level);
+ while(xp=needed){xp-=needed;level++;const reward=level50getIncomeMult();balance+=reward;stats.earned+=reward;needed=xpForNextLevel(level)}
+ scheduleUI();Save.schedule();
+}
+let comboCount=0,comboTimer=null,lastClickTime=0;
+const COMBO_WINDOW=600;
+function getComboMultiplier(){if(comboCount5)return 1;if(comboCount12)return 2;if(comboCount22)return 3;if(comboCount35)return 4;return 5}
+function updateComboVisual(){
+ const m=getComboMultiplier();
+ $('comboDisplay').textContent='x'+m;
+ $('comboDisplay').classList.toggle('show',m1);
+ if(m1){const r=$('comboRing');r.classList.remove('pulse');void r.offsetWidth;r.classList.add('pulse')}
+}
+function resetCombo(){comboCount=0;updateComboVisual()}
+document.querySelectorAll('.btn-nav').forEach((b)={
+ b.addEventListener('click',()={
+  const v=b.dataset.view;if(!vv===currentView)return;
+  SFX.init();SFX.click();switchView(v);
+ });
+});
+function switchView(view){
+ currentView=view;
+ document.querySelectorAll('.view').forEach((v)=v.classList.toggle('active',v.dataset.view===view));
+ document.querySelectorAll('.btn-nav').forEach((b)=b.classList.toggle('active',b.dataset.view===view));
+ if(view==='wheel')drawWheel();
+ if(view==='collection')renderCollection();
+ if(view==='quests')renderQuests();
+ if(view==='market')renderMarket();
+ if(view==='profile')renderProfile();
+ Save.schedule();
+ window.scrollTo({top0,behavior'smooth'});
+}
+let uiDirty=false,uiRaf=null;
+function scheduleUI(){if(uiDirty)return;uiDirty=true;if(uiRaf)return;uiRaf=requestAnimationFrame(()={uiRaf=null;uiDirty=false;renderUI()})}
+function renderUI(){
+ $('balanceDisplay').textContent=fmt(balance);
+ $('btnOpen').disabled=balanceCASES[selectedCase].priceisSpinning;
+ $('clicksCount').textContent=clicks;
+ $('clickerEarned').textContent=fmt(clickerEarned);
+ const curUp=UPGRADES[clickerLevel-1];
+ let reward=curUp.rewardgetIncomeMult();
+ if(Date.now()wheelBoostEnd)reward=2;
+ $('clickReward').textContent='+$'+reward.toFixed(2);
+ $('luckDisplay').textContent=getTotalLuck()+'%';
+ $('prestigeDisplay').textContent=prestige;
+ renderInventory();
+ renderUpgrades();
+}
+function renderUpgrades(){
+ const frag=document.createDocumentFragment();
+ UPGRADES.forEach((u,i)={
+  const btn=document.createElement('button');btn.className='upgrade-btn';
+  const owned=clickerLevel=u.level;const isNext=clickerLevel===u.level-1;
+  if(owned){btn.classList.add('owned');btn.innerHTML=`div✓ ${u.name}divdiv style=font-size.65rem+$${u.reward.toFixed(2)}div`;btn.disabled=true}
+  else if(isNext){btn.innerHTML=`div${u.name}divdiv style=font-size.65rem;colorvar(--money)${fmt(u.cost)}div`;btn.disabled=balanceu.cost;
+   btn.addEventListener('click',()={SFX.init();if(balanceu.cost){SFX.error();showToast('❌ Недостаточно средств','err');return}balance-=u.cost;stats.spent+=u.cost;clickerLevel=u.level;SFX.levelUp();showToast('✅ Кликер +$'+u.reward.toFixed(2));addHistory({type'upgrade',icon'⚡',title'Улучшение кликера',detailu.name,amount-u.cost});scheduleUI();Save.schedule()})}
+  else{btn.innerHTML=`div${u.name}divdiv style=font-size.65rem${fmt(u.cost)}div`;btn.disabled=true}
+  frag.appendChild(btn);
+ });
+ $('upgrades').replaceChildren(frag);
+}
+$('clickerBtn').addEventListener('pointerdown',e={
+ e.preventDefault();SFX.init();
+ const now=Date.now();
+ if(now-lastClickTimeCOMBO_WINDOW)comboCount++;else comboCount=1;
+ lastClickTime=now;
+ if(comboTimer)clearTimeout(comboTimer);comboTimer=setTimeout(resetCombo,COMBO_WINDOW+100);
+ const mult=getComboMultiplier();
+ if(multstats.maxCombo)stats.maxCombo=mult;
+ const up=UPGRADES[clickerLevel-1];
+ let reward=up.rewardmultgetIncomeMult();
+ if(Date.now()wheelBoostEnd)reward=2;
+ balance+=reward;clicks++;clickerEarned+=reward;stats.earned+=reward;stats.clicks=clicks;
+ SFX.pling(mult);
+ addXp(1);
+ updateComboVisual();
+ scheduleUI();Save.schedule();
+ const area=$('clickerArea');
+ if(area.childElementCount16){
+  const f=document.createElement('span');f.className='float-plus';
+  f.textContent='+$'+reward.toFixed(2);
+  f.style.left=(50+(Math.random()30-15))+'%';
+  area.appendChild(f);f.addEventListener('animationend',()=f.remove(),{oncetrue});
+ }
+ checkQuests();
+},{passivefalse});
+[...CASES.map(c=c.closed),...CASES.map(c=c.open),...Object.values(DRINKS)].forEach(u={const im=new Image();im.decoding='async';im.src=u});
+function renderCaseSelect(){
+ const frag=document.createDocumentFragment();
+ CASES.forEach((c,i)={
+  const d=document.createElement('div');
+  d.className='case-opt'+(i===selectedCase' selected''')+(c.style' '+c.style'');
+  const img=document.createElement('img');img.src=c.closed;img.alt='';img.draggable=false;img.decoding='async';
+  if(c.hue!==undefined)img.style.filter=`drop-shadow(0 8px 14px rgba(0,0,0,.55)) hue-rotate(${c.hue}deg)`;
+  d.appendChild(img);
+  if(c.tag){const tag=document.createElement('div');tag.className='co-tag'+(c.tagClass' '+c.tagClass'');tag.textContent=c.tag;d.appendChild(tag)}
+  const nm=document.createElement('div');nm.className='co-name';nm.textContent=c.name.replace(^(ВОЕННЫЙЭЛИТНЫЙЛЕГЕНДАРНЫЙУЛЬТРАБОЖЕСТВЕННЫЙ)s(КЕЙССУНДУК)s,'');d.appendChild(nm);
+  const pr=document.createElement('div');pr.className='co-price';pr.textContent=fmt(c.price);d.appendChild(pr);
+  d.addEventListener('click',()={if(isSpinningi===selectedCase)return;SFX.init();SFX.click();selectedCase=i;applyCase();Save.schedule()});
+  frag.appendChild(d);
+ });
+ $('caseSelect').replaceChildren(frag);
+}
+function caseOdds(c){const m={};c.items.forEach(i=m[i.rarity]=(m[i.rarity]0)+i.chance);return m}
+function applyCase(){
+ const c=CASES[selectedCase];renderCaseSelect();
+ $('caseImg').src=c.closed;$('caseImg').classList.remove('opened','shaking');$('caseStage').classList.remove('hot');
+ $('caseGlow').style.setProperty('--glow',c.glow);$('caseGlow').style.setProperty('--glowHot',c.glowHot);
+ if(c.hue!==undefined)$('caseImg').style.filter=`drop-shadow(0 28px 32px rgba(0,0,0,.65)) hue-rotate(${c.hue}deg)`;else $('caseImg').style.filter='';
+ $('caseName').textContent=c.name;$('casePrice').textContent='Стоимость '+fmt(c.price);
+ const odds=caseOdds(c);const frag=document.createDocumentFragment();
+ RARITY_ORDER.forEach(r={if(!odds[r])return;const seg=document.createElement('div');seg.className='odds-seg';seg.style.flexGrow=odds[r];seg.style.background=RARITY_COLORS[r];seg.title=RARITY_NAMES[r]+' '+odds[r]+'%';seg.textContent=odds[r]=8odds[r]+'%''';frag.appendChild(seg)});
+ $('oddsBar').replaceChildren(frag);
+ $('btnOpen').textContent='Открыть за '+fmt(c.price);$('btnOpen').className='btn-open'+(c.btn' '+c.btn'');
+ scheduleUI();
+}
+function rollItem(pool){
+ const totalLuck=getTotalLuck();
+ const r=Math.random()100;let cum=0;
+ for(const it of pool){cum+=it.chance;if(r=cum){
+  let price=it.minP+Math.random()(it.maxP-it.minP);
+  let critMult=1;
+  const critChance=0.05+totalLuck0.002;
+  if(Math.random()critChance){critMult=2+Math.floor(Math.random()4)}
+  price=critMult;
+  return{...it,price+price.toFixed(2),id++itemIdCounter,critMult}
+ }}
+ const f=pool[0];return{...f,price+(f.minP+Math.random()(f.maxP-f.minP)).toFixed(2),id++itemIdCounter,critMult1};
+}
+const ITEM_W=128,WIN_IDX=50,SPIN_MS=5200;
+function cubicBezier(p1x,p1y,p2x,p2y){const cx=3p1x,bx=3(p2x-p1x)-cx,ax=1-cx-bx;const cy=3p1y,by=3(p2y-p1y)-cy,ay=1-cy-by;const sX=t=((axt+bx)t+cx)t;const sY=t=((ayt+by)t+cy)t;const sDX=t=(3axt+2bx)t+cx;return x={let t=x;for(let i=0;i6;i++){const e=sX(t)-x;if(Math.abs(e)1e-5)break;const d=sDX(t);if(Math.abs(d)1e-6)break;t-=ed}return sY(t)}}
+const EASE=cubicBezier(.12,.82,.16,1);
+let spinAnim=null,lastTickIdx=-1,tickRaf=null;
+function tickLoop(){if(!isSpinning!spinAnim){tickRaf=null;return}const p=Math.min((performance.now()-spinAnim.start)SPIN_MS,1);const idx=Math.round(spinAnim.offsetEASE(p)ITEM_W);if(idx!==lastTickIdx){if(lastTickIdx!==-1&&p1)SFX.tick();lastTickIdx=idx}if(p1)tickRaf=requestAnimationFrame(tickLoop);else tickRaf=null}
+function openCase(){
+ SFX.init();if(Music.on&&!Music.started)Music.init();
+ const c=CASES[selectedCase];
+ if(balancec.priceisSpinning){SFX.error();return}
+ isSpinning=true;balance-=c.price;stats.opened++;stats.spent+=c.price;
+ addXp(50);scheduleUI();Save.schedule();SFX.click();
+ $('caseImg').classList.remove('opened');$('caseImg').classList.add('shaking');SFX.clank();
+ setTimeout(()=SFX.clank(),200);
+ setTimeout(()={
+  $('caseImg').classList.remove('shaking');$('caseImg').src=c.open;$('caseImg').classList.add('opened');$('caseStage').classList.add('hot');
+  $('caseFlash').classList.remove('go');void $('caseFlash').offsetWidth;$('caseFlash').classList.add('go');
+  SFX.whoosh();startSpin(c);
+ },520);
+}
+function startSpin(c){
+ const winner=rollItem(c.items);
+ const strip=new Array(60);for(let i=0;i60;i++)strip[i]=i===WIN_IDXwinnerrollItem(c.items);
+ const track=$('rouletteTrack');$('rouletteSection').classList.add('active');
+ track.classList.remove('spinning');track.style.transform='translateX(0)';
+ const frag=document.createDocumentFragment();
+ strip.forEach(it={const col=RARITY_COLORS[it.rarity];const div=document.createElement('div');div.className='roulette-item';div.style.background=RARITY_BG[it.rarity];div.style.borderColor=col+'55';div.innerHTML=`img class=r-img src=${it.img} alt= draggable=false decoding=asyncdiv class=r-name style=color${col}${it.name}divdiv class=r-price style=color${col}${fmt(it.price)}div`;frag.appendChild(div)});
+ track.replaceChildren(frag);
+ const offset=WIN_IDXITEM_W+ITEM_W2+(Math.random()-.5)44;
+ requestAnimationFrame(()={requestAnimationFrame(()={track.classList.add('spinning');track.style.transform=`translateX(-${offset}px)`;spinAnim={startperformance.now(),offset};lastTickIdx=-1;if(tickRaf)cancelAnimationFrame(tickRaf);tickLoop()})});
+ setTimeout(()={
+  inventory.push(winner);isSpinning=false;spinAnim=null;
+  collection[winner.name]=(collection[winner.name]0)+1;
+  if(['rare','epic','mythic','legendary'].includes(winner.rarity))stats.rareDrops++;
+  if(winner.critMult1)stats.critHits=(stats.critHits0)+1;
+  scheduleUI();Save.schedule();
+  SFX.reveal(winner.rarity);
+  if(winner.critMult1){setTimeout(()={SFX.crit();showToast('💥 КРИТ! x'+winner.critMult+' цена!','crit');spawnParticles('#ff4d6d',60)},300)}
+  if(winner.rarity==='mythic'winner.rarity==='legendary')spawnParticles(RARITY_COLORS[winner.rarity],winner.rarity==='legendary'14090);
+  addHistory({type'case_open',icon'📦',title'Открыт '+c.name.replace(^(ВОЕННЫЙЭЛИТНЫЙЛЕГЕНДАРНЫЙУЛЬТРАБОЖЕСТВЕННЫЙ)s(КЕЙССУНДУК)s,''),detailwinner.name+(winner.critMult1' 💥x'+winner.critMult''),raritywinner.rarity,amountwinner.price,amountNeg-c.price});
+  showModal(winner);
+  checkQuests();
+  setTimeout(()={$('rouletteSection').classList.remove('active');track.innerHTML='';$('caseImg').src=c.closed;if(c.hue!==undefined)$('caseImg').style.filter=`drop-shadow(0 28px 32px rgba(0,0,0,.65)) hue-rotate(${c.hue}deg)`;else $('caseImg').style.filter='';$('caseImg').classList.remove('opened');$('caseStage').classList.remove('hot')},600);
+ },SPIN_MS+400);
+}
+let lastInvSig='';
+function renderInventory(){
+ const len=inventory.length;$('invCount').textContent=len;
+ const total=inventory.reduce((s,i)=s+i.price,0);
+ $('invTotal').textContent=len'· '+fmt(total)'';
+ $('btnSellAll').style.display=len'block''none';
+ const sig=len===0''len+''+inventory[inventory.length-1].id;
+ if(sig===lastInvSig)return;lastInvSig=sig;
+ if(!len){$('invGrid').innerHTML='div class=empty-invИнвентарь пуст. Откройте кейс!div';return}
+ const frag=document.createDocumentFragment();
+ for(let i=len-1;i=0;i--){
+  const item=inventory[i];const c=RARITY_COLORS[item.rarity];
+  const card=document.createElement('div');card.className=`inv-card rarity-${item.rarity}`;
+  card.innerHTML=`div class=item-img-wrap style=backgroundradial-gradient(ellipse at 50% 60%, ${c}22, transparent 70%)img class=item-img src=${item.img} alt= loading=lazy decoding=async draggable=falsedivdiv class=item-name${item.name}divdiv class=item-rarity style=color${c}${RARITY_NAMES[item.rarity]}divdiv class=item-price${fmt(item.price)}divbutton class=btn-sell data-id=${item.id}Продатьbutton`;
+  frag.appendChild(card);
+ }
+ $('invGrid').replaceChildren(frag);
+}
+$('invGrid').addEventListener('click',e={
+ const btn=e.target.closest('.btn-sell');if(!btn)return;SFX.init();
+ const id=+btn.dataset.id;const idx=inventory.findIndex(i=i.id===id);if(idx===-1)return;
+ const item=inventory[idx];
+ balance+=item.price;stats.earned+=item.price;stats.sold=(stats.sold0)+1;
+ addHistory({type'sell',icon'💸',title'Продано '+item.name,detailRARITY_NAMES[item.rarity],rarityitem.rarity,amountitem.price});
+ addXp(10);inventory.splice(idx,1);SFX.coin();scheduleUI();Save.schedule();checkQuests();
+});
+$('btnSellAll').addEventListener('click',()={
+ SFX.init();if(!inventory.length)return;
+ const total=inventory.reduce((s,i)=s+i.price,0);
+ balance+=total;stats.earned+=total;stats.sold=(stats.sold0)+inventory.length;
+ addHistory({type'sell_all',icon'💰',title'Продано всё',detailinventory.length+' предметов',amounttotal});
+ addXp(inventory.length10);inventory=[];SFX.coin();setTimeout(()=SFX.coin(),140);scheduleUI();Save.schedule();checkQuests();
+});
+function showModal(item){
+ pendingDoubleItem=item;
+ const c=RARITY_COLORS[item.rarity];
+ $('modalImg').src=item.img;
+ $('modalImgWrap').style.background=`radial-gradient(ellipse at 50% 55%, ${c}33, transparent 70%)`;
+ $('modalName').textContent=item.name+(item.critMult1' 💥 x'+item.critMult'');
+ $('modalName').style.color=c;
+ $('modalRarity').textContent=RARITY_NAMES[item.rarity];$('modalRarity').style.color=c;
+ $('modalPrice').textContent=fmt(item.price);
+ const canDouble=['rare','epic','mythic','legendary'].includes(item.rarity);
+ $('modalDoubleWrap').style.display=canDouble'block''none';
+ if(canDouble){
+  const odds=item.rarity==='rare'60item.rarity==='epic'50item.rarity==='mythic'4030;
+  $('doubleOdds').textContent=odds+'%';
+  $('btnRisk').dataset.odds=odds;
+ }
+ $('wonLabel').textContent='Вы получили';
+ $('btnCloseModal').style.display='';
+ $('modalOverlay').classList.add('active');
+}
+$('btnTake').addEventListener('click',()={SFX.init();SFX.click();closeModal()});
+$('btnRisk').addEventListener('click',()={
+ SFX.init();
+ if(!pendingDoubleItem)return;
+ const odds=+$('btnRisk').dataset.odds;
+ if(Math.random()100odds){
+  pendingDoubleItem.price=2;
+  stats.doubleWins=(stats.doubleWins0)+1;
+  SFX.crit();
+  spawnParticles(RARITY_COLORS[pendingDoubleItem.rarity],80);
+  showToast('🎉 Успех! Цена x2!','crit');
+  addHistory({type'double_win',icon'🎲',title'Удвоение успешно!',detailpendingDoubleItem.name,raritypendingDoubleItem.rarity,amountpendingDoubleItem.price2});
+  showModal(pendingDoubleItem);
+ }else{
+  pendingDoubleItem=null;
+  stats.doubleLosses=(stats.doubleLosses0)+1;
+  SFX.error();
+  $('wonLabel').textContent='НЕУДАЧА';
+  $('modalName').textContent='Предмет потерян';
+  $('modalName').style.color='#ff5566';
+  $('modalRarity').textContent='';
+  $('modalPrice').textContent='$0';
+  $('modalDoubleWrap').style.display='none';
+  $('modalImg').style.opacity='0.3';
+  showToast('💔 Предмет потерян','err');
+  addHistory({type'double_lose',icon'💔',title'Удвоение провалено',detail'Предмет потерян',amount0});
+  if(inventory.length){inventory.pop()}
+  scheduleUI();Save.schedule();
+ }
+});
+function closeModal(){
+ $('modalOverlay').classList.remove('active');
+ $('modalImg').style.opacity='';
+ pendingDoubleItem=null;
+}
+$('btnCloseModal').addEventListener('click',()={SFX.init();SFX.click();closeModal()});
+$('modalOverlay').addEventListener('click',e={if(e.target===$('modalOverlay')){SFX.init();SFX.click();closeModal()}});
+const WHEEL_COOLDOWN=5601000;
+let wheelSpinning=false;
+let wheelAngle=0;
+const wheelCanvas=$('wheelCanvas');
+const wheelCtx=wheelCanvas.getContext('2d');
+function drawWheel(angle=0){
+ const w=wheelCanvas.width,h=wheelCanvas.height;
+ const cx=w2,cy=h2,r=Math.min(w,h)2-10;
+ wheelCtx.clearRect(0,0,w,h);
+ wheelCtx.save();
+ wheelCtx.beginPath();wheelCtx.arc(cx,cy,r,0,Math.PI2);
+ wheelCtx.fillStyle='#1a1030';wheelCtx.fill();
+ wheelCtx.lineWidth=4;wheelCtx.strokeStyle='rgba(185,140,255,.4)';wheelCtx.stroke();
+ wheelCtx.restore();
+ const n=WHEEL_PRIZES.length;
+ const arc=Math.PI2n;
+ wheelCtx.save();
+ wheelCtx.translate(cx,cy);
+ wheelCtx.rotate(angle);
+ for(let i=0;in;i++){
+  const start=iarc;const end=(i+1)arc;
+  wheelCtx.beginPath();
+  wheelCtx.moveTo(0,0);
+  wheelCtx.arc(0,0,r-6,start,end);
+  wheelCtx.closePath();
+  wheelCtx.fillStyle=WHEEL_PRIZES[i].color;
+  wheelCtx.fill();
+  wheelCtx.strokeStyle='rgba(0,0,0,.3)';
+  wheelCtx.lineWidth=2;
+  wheelCtx.stroke();
+  wheelCtx.save();
+  wheelCtx.rotate(start+arc2);
+  wheelCtx.textAlign='right';
+  wheelCtx.fillStyle='#fff';
+  wheelCtx.font='bold 13px Inter';
+  wheelCtx.shadowColor='rgba(0,0,0,.6)';
+  wheelCtx.shadowBlur=4;
+  wheelCtx.fillText(WHEEL_PRIZES[i].label,r-18,4);
+  wheelCtx.restore();
+ }
+ wheelCtx.restore();
+ wheelCtx.beginPath();wheelCtx.arc(cx,cy,18,0,Math.PI2);
+ wheelCtx.fillStyle='#2a1050';wheelCtx.fill();
+ wheelCtx.strokeStyle='rgba(185,140,255,.5)';wheelCtx.lineWidth=2;wheelCtx.stroke();
+}
+function updateWheelTimer(){
+ const now=Date.now();
+ const elapsed=now-lastWheelSpin;
+ const remaining=Math.max(0,WHEEL_COOLDOWN-elapsed);
+ const m=Math.floor(remaining60000);
+ const s=Math.floor((remaining%60000)1000);
+ $('wheelTimer').textContent=String(m).padStart(2,'0')+''+String(s).padStart(2,'0');
+ $('btnSpinWheel').disabled=remaining0wheelSpinning;
+}
+$('btnSpinWheel').addEventListener('click',()={
+ SFX.init();
+ const now=Date.now();
+ if(now-lastWheelSpinWHEEL_COOLDOWN){SFX.error();return}
+ if(wheelSpinning)return;
+ wheelSpinning=true;
+ lastWheelSpin=now;
+ stats.wheelSpins=(stats.wheelSpins0)+1;
+ Save.schedule();
+ const idx=Math.floor(Math.random()WHEEL_PRIZES.length);
+ const prize=WHEEL_PRIZES[idx];
+ const n=WHEEL_PRIZES.length;
+ const arc=Math.PI2n;
+ const targetAngle=-Math.PI2-(idxarc+arc2);
+ const spins=5+Math.random()3;
+ const finalAngle=targetAngle-spinsMath.PI2;
+ const startAngle=wheelAngle;
+ const startTime=performance.now();
+ const duration=5000;
+ SFX.wheel();
+ function animSpin(){
+  const t=Math.min((performance.now()-startTime)duration,1);
+  const eased=EASE(t);
+  wheelAngle=startAngle+(finalAngle-startAngle)eased;
+  drawWheel(wheelAngle);
+  if(t1){requestAnimationFrame(animSpin)}
+  else{wheelSpinning=false;applyWheelPrize(prize)}
+ }
+ requestAnimationFrame(animSpin);
+});
+function applyWheelPrize(prize){
+ SFX.crit();
+ spawnParticles(prize.color,80);
+ let detail='',amount=0;
+ if(prize.type==='money'){
+  const amt=prize.valuegetIncomeMult();
+  balance+=amt;stats.earned+=amt;
+  showToast('🎉 Выигрыш '+fmt(amt),'luck');
+  detail=prize.label;amount=amt;
+ }else if(prize.type==='luck'){
+  luck+=prize.value;
+  showToast('🍀 Удача +'+prize.value+'%!','luck');
+  detail='+'+prize.value+'% удачи';
+ }else if(prize.type==='boost'){
+  wheelBoostEnd=Date.now()+prize.value1000;
+  showToast('⚡ x2 клик-доход на '+prize.value+'с!','luck');
+  detail='x2 на '+prize.value+'с';
+ }
+ addHistory({type'wheel',icon'🎰',title'Вращение колеса',detailprize.label,amountamount0});
+ scheduleUI();Save.schedule();
+}
+setInterval(updateWheelTimer,500);
+function getDayNumber(){return Math.floor(Date.now()(2460601000))}
+function seededRandom(seed){let s=seed;return()={s=(s9301+49297)%233280;return s233280}}
+function generateDailyQuests(){
+ const today=getDayNumber();
+ if(questsDay===today&&quests.length===3)return;
+ questsDay=today;
+ questsSeed=today1000+7;
+ const rng=seededRandom(questsSeed);
+ const pool=[...QUEST_TEMPLATES];
+ const chosen=[];
+ while(chosen.length3&&pool.length){
+  const idx=Math.floor(rng()pool.length);
+  chosen.push({...pool[idx],progress0,claimedfalse});
+  pool.splice(idx,1);
+ }
+ quests=chosen;
+ Save.schedule();
+}
+function renderQuests(){
+ generateDailyQuests();
+ const frag=document.createDocumentFragment();
+ quests.forEach((q,i)={
+  const card=document.createElement('div');card.className='card quest-card';
+  const pct=Math.min(100,q.progressq.target100);
+  const done=q.progress=q.target;
+  const reward=Math.floor(q.rewardgetQuestMult());
+  card.innerHTML=`
+   div class=quest-head
+    div class=quest-icon${q.icon}div
+    div class=quest-title${q.title}div
+    div class=quest-reward+${fmt(reward)}div
+   div
+   div style=font-size.78rem;colorvar(--text-dim)${q.desc.replace('N',q.target.toLocaleString('ru-RU'))}div
+   div class=quest-progress-bardiv class=quest-progress-fill style=width${pct}%divdiv
+   div style=displayflex;justify-contentspace-between;align-itemscenter;gap8px
+    div class=quest-progress-text${Math.min(q.progress,q.target)}  ${q.target}div
+    button class=btn-quest data-idx=${i} ${!doneq.claimed'disabled'''}${q.claimed'✓ Получено'done'Забрать''В процессе'}button
+   div`;
+  frag.appendChild(card);
+ });
+ $('questsGrid').replaceChildren(frag);
+ renderDailyBonus();
+}
+$('questsGrid').addEventListener('click',e={
+ const btn=e.target.closest('.btn-quest');if(!btnbtn.disabled)return;
+ SFX.init();
+ const idx=+btn.dataset.idx;
+ const q=quests[idx];if(!qq.claimedq.progressq.target)return;
+ q.claimed=true;
+ const reward=Math.floor(q.rewardgetQuestMult());
+ balance+=reward;stats.earned+=reward;
+ stats.questsDone=(stats.questsDone0)+1;
+ SFX.quest();
+ spawnParticles(RARITY_COLORS.legendary,60);
+ showToast('🎁 Квест выполнен +'+fmt(reward));
+ addHistory({type'quest',icon'📋',title'Квест '+q.title,detailq.desc.replace('N',q.target.toLocaleString('ru-RU')),amountreward});
+ scheduleUI();Save.schedule();
+ renderQuests();
+});
+function checkQuests(){
+ if(!quests.length)return;
+ let changed=false;
+ quests.forEach(q={
+  if(q.claimed)return;
+  let cur=0;
+  if(q.stat==='opened')cur=stats.opened;
+  else if(q.stat==='clicks')cur=stats.clicksclicks;
+  else if(q.stat==='earn')cur=stats.earned;
+  else if(q.stat==='sell')cur=stats.sold;
+  else if(q.stat==='buy')cur=stats.bought;
+  else if(q.stat==='rare_drop')cur=stats.rareDrops;
+  else if(q.stat==='combo')cur=stats.maxCombo;
+  if(cur!==q.progress){q.progress=cur;changed=true}
+ });
+ if(changed&&currentView==='quests')renderQuests();
+ if(changed)Save.schedule();
+}
+function getDailyRewards(){return [50,100,200,350,500,750,1500]}
+function renderDailyBonus(){
+ const rewards=getDailyRewards();
+ const frag=document.createDocumentFragment();
+ for(let i=0;i7;i++){
+  const d=document.createElement('div');d.className='daily-day';
+  if(idailyStreak%7(dailyStreak=7&&dailyStreak%7===0&&i6))d.classList.add('claimed');
+  else if(i===(dailyStreak%7)&&dailyStreak%7!==0)d.classList.add('today');
+  d.innerHTML=`div class=day-numДень ${i+1}divdiv class=day-reward${fmt(rewards[i])}div`;
+  frag.appendChild(d);
+ }
+ $('dailyStreak').replaceChildren(frag);
+ $('streakDisplay').textContent=dailyStreak;
+ const today=getDayNumber();
+ const canClaim=today!==lastDailyDay;
+ $('btnClaimDaily').disabled=!canClaim;
+ $('btnClaimDaily').textContent=canClaim'Забрать''✓ Получено';
+}
+$('btnClaimDaily').addEventListener('click',()={
+ SFX.init();
+ const today=getDayNumber();
+ if(today===lastDailyDay){SFX.error();return}
+ if(lastDailyDay===today-1)dailyStreak++;
+ else if(lastDailyDaytoday-1)dailyStreak=1;
+ else if(lastDailyDay===0)dailyStreak=1;
+ lastDailyDay=today;
+ const rewards=getDailyRewards();
+ const reward=rewards[(dailyStreak-1)%7]getIncomeMult();
+ balance+=reward;stats.earned+=reward;
+ SFX.success();
+ spawnParticles(RARITY_COLORS.legendary,80);
+ $('dailyStreakModal').textContent=dailyStreak;
+ $('dailyRewardModal').textContent=fmt(reward);
+ $('dailyOverlay').classList.add('active');
+ addHistory({type'daily',icon'🎁',title'Ежедневный бонус',detail'Серия '+dailyStreak+' 🔥',amountreward});
+ scheduleUI();Save.schedule();
+ renderDailyBonus();
+});
+$('btnClaimDailyModal').addEventListener('click',()={
+ SFX.init();SFX.click();
+ $('dailyOverlay').classList.remove('active');
+});
+function renderCollection(){
+ const total=ALL_ITEMS.length;
+ const owned=ALL_ITEMS.filter(i=(collection[i.name]0)0).length;
+ $('collProgress').textContent=owned+''+total;
+ const frag=document.createDocumentFragment();
+ ALL_ITEMS.forEach(item={
+  const count=collection[item.name]0;
+  const isOwned=count0;
+  const card=document.createElement('div');
+  card.className=`coll-card rarity-${item.rarity}`+(isOwned' owned'' locked');
+  card.innerHTML=`
+   ${!isOwned'div class=cc-lock🔒div'''}
+   img src=${item.img} alt= draggable=false style=${!isOwned'filtergrayscale(1) brightness(.4)'''}
+   div class=cc-name style=color${isOwnedRARITY_COLORS[item.rarity]'var(--text-dim)'}${item.name}div
+   div class=cc-rarity style=color${RARITY_COLORS[item.rarity]}${RARITY_NAMES[item.rarity]}div
+   ${isOwned'div class=cc-countx'+count+'div'''}`;
+  frag.appendChild(card);
+ });
+ $('collGrid').replaceChildren(frag);
+ renderCollectionBonuses();
+}
+function renderCollectionBonuses(){
+ const frag=document.createDocumentFragment();
+ RARITY_ORDER.forEach(r={
+  const items=ALL_ITEMS.filter(i=i.rarity===r);
+  const owned=items.filter(i=(collection[i.name]0)0).length;
+  const complete=owned===items.length;
+  const pill=document.createElement('div');
+  pill.style.cssText=`padding6px 12px;border-radius8px;background${complete'rgba(110,224,110,.12)''rgba(0,0,0,.3)'};border1px solid ${complete'rgba(110,224,110,.35)''var(--border)'};font-size.75rem;font-weight700;color${complete'#6ee06e''var(--text-dim)'}`;
+  pill.textContent=RARITY_NAMES[r]+' '+owned+''+items.length+(complete' ✓''');
+  frag.appendChild(pill);
+ });
+ $('collBonuses').replaceChildren(frag);
+}
+function renderMarket(){
+ const frag=document.createDocumentFragment();
+ BOTS.forEach(bot={
+  const card=document.createElement('div');
+  card.className='bot-card';
+  const head=document.createElement('div');head.className='bot-head';
+  head.innerHTML=`div class=bot-avatar${bot.avatar}div
+   div class=bot-info
+    div class=bot-name${bot.name}div
+    div class=bot-rank${bot.rank}div
+    div class=bot-statusонлайнdiv
+   div`;
+  card.appendChild(head);
+  const items=document.createElement('div');items.className='bot-items';
+  bot.items.forEach((it,idx)={
+   const col=RARITY_COLORS[it.rarity];
+   const row=document.createElement('div');
+   row.className='bot-item';
+   row.innerHTML=`
+    div class=bot-item-imgimg src=${it.img} alt= loading=lazy decoding=async draggable=falsediv
+    div class=bot-item-info
+     div class=bot-item-name style=color${col}${it.name}div
+     div class=bot-item-rarity style=color${col}${RARITY_NAMES[it.rarity]}div
+     div class=bot-item-price${fmt(it.price)}div
+    div
+    button class=btn-buy data-bot=${bot.id} data-idx=${idx}Купитьbutton`;
+   items.appendChild(row);
+  });
+  card.appendChild(items);
+  frag.appendChild(card);
+ });
+ $('botsGrid').replaceChildren(frag);
+ updateMarketButtons();
+}
+function updateMarketButtons(){
+ $('botsGrid').querySelectorAll('.btn-buy').forEach(btn={
+  const bot=BOTS.find(b=b.id===btn.dataset.bot);
+  if(!bot)return;
+  const it=bot.items[+btn.dataset.idx];
+  btn.disabled=balanceit.price;
+ });
+}
+$('botsGrid').addEventListener('click',e={
+ const btn=e.target.closest('.btn-buy');if(!btnbtn.disabled)return;
+ SFX.init();
+ const bot=BOTS.find(b=b.id===btn.dataset.bot);
+ if(!bot)return;
+ const it=bot.items[+btn.dataset.idx];
+ if(balanceit.price){
+  SFX.error();
+  showToast('❌ Недостаточно средств','err');
+  return;
+ }
+ balance-=it.price;
+ stats.spent+=it.price;
+ stats.bought=(stats.bought0)+1;
+ const newItem={nameit.name,imgit.img,rarityit.rarity,price+it.price,id++itemIdCounter};
+ inventory.push(newItem);
+ collection[it.name]=(collection[it.name]0)+1;
+ addXp(30);
+ SFX.buy();
+ showToast('✅ Куплено у '+bot.name);
+ addHistory({type'buy',icon'🛒',title'Куплено у '+bot.name,detailit.name,rarityit.rarity,amount-it.price});
+ scheduleUI();Save.schedule();
+ btn.classList.add('bought');
+ btn.textContent='✓ Куплено';
+ setTimeout(()={btn.classList.remove('bought');btn.textContent='Купить';updateMarketButtons()},900);
+ checkQuests();
+});
+function getPlayerRank(){
+ if(prestige=10)return{title'👑 Легенда Чекушек',emoji'👑'};
+ if(prestige=5)return{title'⭐ Мастер Дропа',emoji'⭐'};
+ if(level=25)return{title'💎 Ветеран',emoji'💎'};
+ if(level=15)return{title'🔥 Опытный',emoji'🔥'};
+ if(level=10)return{title'🎖️ Боец',emoji'🎖️'};
+ if(level=5)return{title'🥉 Новобранец',emoji'🥉'};
+ return{title'🌱 Новичок',emoji'🌱'};
+}
+function renderProfile(){
+ const rank=getPlayerRank();
+ $('profileAvatar').textContent=rank.emoji;
+ $('profileName').textContent=playerName;
+ $('profileRank').textContent=rank.title+' · Уровень '+level;
+ $('profileBalance').textContent=fmt(balance);
+ 
+ const profit=stats.earned-stats.spent;
+ const profitClass=profit=0'positive''negative';
+ 
+ const statsData=[
+  {label'Баланс',valuefmt(balance),cls'money'},
+  {label'Профит',value(profit=0'+''')+fmt(profit),clsprofitClass},
+  {label'Заработано',valuefmt(stats.earned),cls'money'},
+  {label'Потрачено',valuefmt(stats.spent),cls'negative'},
+  {label'Кейсов открыто',valuestats.opened,cls'legendary'},
+  {label'Кликов',valuestats.clicksclicks,cls'xp'},
+  {label'Заработано кликами',valuefmt(clickerEarned),cls'money'},
+  {label'Куплено на рынке',valuestats.bought0,cls'xp'},
+  {label'Продано предметов',valuestats.sold0,cls'xp'},
+  {label'Контрактов',valuestats.contracts0,cls'xp'},
+  {label'Редких дропов',valuestats.rareDrops0,cls'legendary'},
+  {label'Крит. ударов',valuestats.critHits0,cls'crit'},
+  {label'Макс. комбо',value'x'+(stats.maxCombo1),cls'crit'},
+  {label'Удвоений ✓',valuestats.doubleWins0,cls'positive'},
+  {label'Удвоений ✗',valuestats.doubleLosses0,cls'negative'},
+  {label'Вращений колеса',valuestats.wheelSpins0,cls'xp'},
+  {label'Квестов выполнено',valuestats.questsDone0,cls'legendary'},
+  {label'Промокодов',valuestats.promosUsed0,cls'legendary'},
+  {label'Уровень',valuelevel,cls'xp'},
+  {label'Престиж',value'⭐ '+prestige,cls'legendary'},
+  {label'Удача',valuegetTotalLuck()+'%',cls'luck'},
+  {label'В коллекции',valueObject.keys(collection).length+''+ALL_ITEMS.length,cls'legendary'},
+  {label'В инвентаре',valueinventory.length,cls'money'}
+ ];
+ 
+ const statsFrag=document.createDocumentFragment();
+ statsData.forEach(s={
+  const div=document.createElement('div');
+  div.className='profile-stat '+s.cls;
+  div.innerHTML=`div class=ps-val${s.value}divdiv class=ps-label${s.label}div`;
+  statsFrag.appendChild(div);
+ });
+ $('profileStats').replaceChildren(statsFrag);
+ 
+ renderHistory();
+}
+function renderHistory(){
+ $('historyCount').textContent='('+history.length+')';
+ if(!history.length){
+  $('historyList').innerHTML='div class=history-emptyИстория пуста. Начни играть!div';
+  return;
+ }
+ const frag=document.createDocumentFragment();
+ history.forEach(h={
+  const item=document.createElement('div');
+  item.className='history-item';
+  const amt=h.amount0;
+  let amtHtml='';
+  let amtClass='neutral';
+  if(h.amountNeg!==undefined){
+   amtHtml=`div style=color#ff5566${fmt(h.amountNeg)}divdiv style=colorvar(--luck);font-size.75rem→ ${fmt(amt)}div`;
+  }else if(amt0){
+   amtHtml='+'+fmt(amt);
+   amtClass='pos';
+  }else if(amt0){
+   amtHtml=fmt(amt);
+   amtClass='neg';
+  }else{
+   amtHtml='—';
+  }
+  const rarityStyle=h.rarity`style=color${RARITY_COLORS[h.rarity]}`'';
+  item.innerHTML=`
+   div class=history-icon${h.icon}div
+   div class=history-info
+    div class=history-title-text ${rarityStyle}${h.title}div
+    div class=history-sub${h.detail''} · ${fmtTime(h.ts)}div
+   div
+   div class=history-amount ${amtClass}${amtHtml}div`;
+  frag.appendChild(item);
+ });
+ $('historyList').replaceChildren(frag);
+}
+$('btnClearHistory').addEventListener('click',()={
+ SFX.init();SFX.click();
+ clearHistory();
+});
+function openPromoModal(){
+ SFX.init();SFX.click();
+ $('promoInput').value='';
+ $('promoInput').classList.remove('error','success');
+ $('promoResult').innerHTML='';
+ updatePromoUsedInfo();
+ $('promoOverlay').classList.add('active');
+ setTimeout(()=$('promoInput').focus(),100);
+}
+function closePromoModal(){
+ SFX.init();SFX.click();
+ $('promoOverlay').classList.remove('active');
+}
+function updatePromoUsedInfo(){
+ const usedCount=usedPromos.length;
+ if(usedCount===0){
+  $('promoUsed').innerHTML='🔓 У тебя пока нет активированных промокодов';
+ }else{
+  const list=usedPromos.map(c=`b${c.toUpperCase()}b`).join(', ');
+  $('promoUsed').innerHTML=`✅ Активировано ${usedCount}br${list}`;
+ }
+}
+function activatePromo(){
+ SFX.init();
+ const input=$('promoInput');
+ const code=input.value.trim().toLowerCase();
+ input.classList.remove('error','success');
+ 
+ if(!code){
+  input.classList.add('error');
+  SFX.error();
+  showToast('❌ Введи промокод','err');
+  return;
+ }
+ 
+ const promo=PROMO_CODES[code];
+ if(!promo){
+  input.classList.add('error');
+  SFX.error();
+  $('promoResult').innerHTML='div class=promo-result style=backgroundrgba(255,85,102,.1);border-colorrgba(255,85,102,.3)div class=pr-title style=color#ff5566❌ Неверный промокодdivdiv class=pr-detailПроверь правильность ввода и попробуй сноваdivdiv';
+  return;
+ }
+ 
+ const activations=promoActivations[code]0;
+ if(activations=promo.maxUses){
+  input.classList.add('error');
+  SFX.error();
+  $('promoResult').innerHTML='div class=promo-result style=backgroundrgba(255,85,102,.1);border-colorrgba(255,85,102,.3)div class=pr-title style=color#ff5566⚠ Промокод использованdivdiv class=pr-detailЭтот код можно активировать только b'+promo.maxUses+'b разdivdiv';
+  return;
+ }
+ 
+ const reward=promo.reward();
+ 
+ if(reward.items&&reward.items.length){
+  reward.items.forEach(item={
+   inventory.push(item);
+   collection[item.name]=(collection[item.name]0)+1;
+  });
+ }
+ if(reward.money){
+  balance+=reward.money;
+  stats.earned+=reward.money;
+ }
+ 
+ promoActivations[code]=(activations0)+1;
+ if(!usedPromos.includes(code))usedPromos.push(code);
+ stats.promosUsed=(stats.promosUsed0)+1;
+ 
+ SFX.promoFanfare();
+ spawnParticles(RARITY_COLORS.legendary,150);
+ 
+ input.classList.add('success');
+ $('promoResult').innerHTML=`div class=promo-resultdiv class=pr-title🎉 ${reward.title}divdiv class=pr-detail${reward.detail}divdiv`;
+ updatePromoUsedInfo();
+ 
+ addHistory({type'promo',icon'🎟️',title'Промокод '+code.toUpperCase(),detailreward.itemsreward.items.length+' предметов'reward.detail,amountreward.money0});
+ 
+ showToast('🎟️ Промокод активирован!','promo');
+ scheduleUI();Save.schedule();
+}
+$('btnPromo').addEventListener('click',openPromoModal);
+$('btnClosePromo').addEventListener('click',closePromoModal);
+$('promoOverlay').addEventListener('click',e={if(e.target===$('promoOverlay'))closePromoModal()});
+$('btnActivatePromo').addEventListener('click',activatePromo);
+$('promoInput').addEventListener('keydown',e={
+ if(e.key==='Enter'){e.preventDefault();activatePromo()}
+});
+function pushActivity(user,item,rarity){
+ const col=RARITY_COLORS[rarity];
+ const div=document.createElement('div');div.className='activity-item';
+ div.innerHTML=`span class=ai-user${user}span получил span class=ai-item style=color${col}${item}span`;
+ $('activityFeed').appendChild(div);
+ setTimeout(()=div.remove(),6000);
+ while($('activityFeed').childElementCount4)$('activityFeed').firstChild.remove();
+}
+function randomActivity(){
+ const user=FAKE_USERS[Math.floor(Math.random()FAKE_USERS.length)];
+ const all=[...ITEMS1,...ITEMS2,...ITEMS3,...ITEMS4,...ITEMS5];
+ const r=Math.random()100;let cum=0;let picked=all[0];
+ for(const it of all){cum+=it.chance;if(r=cum){picked=it;break}}
+ pushActivity(user,picked.name,picked.rarity);
+}
+function scheduleActivity(){
+ const delay=7000+Math.random()8000;
+ setTimeout(()={randomActivity();scheduleActivity()},delay);
+}
+$('btnOpen').addEventListener('click',openCase);
+$('caseStage').addEventListener('click',()={if(!isSpinning)openCase()});
+$('btnMute').addEventListener('click',()={
+ SFX.init();SFX.muted=!SFX.muted;
+ if(SFX.master)SFX.master.gain.value=SFX.muted00.85;
+ $('btnMute').textContent=SFX.muted'🔇''🔊';
+ $('btnMute').classList.toggle('off',SFX.muted);
+});
+$('btnMusic').addEventListener('click',()={
+ SFX.init();Music.setOn(!Music.on);
+ $('btnMusic').classList.toggle('off',!Music.on);
+});
+document.addEventListener('pointerdown',()={
+ SFX.init();if(Music.on&&!Music.started)Music.init();
+},{oncetrue,passivetrue});
+const canvas=$('particleCanvas'),ctx=canvas.getContext('2d',{alphatrue});
+let particles=[],canvasDirty=false;
+const dpr=Math.min(window.devicePixelRatio1,2);
+function resizeCanvas(){canvas.width=innerWidthdpr;canvas.height=innerHeightdpr;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0)}
+addEventListener('resize',resizeCanvas,{passivetrue});resizeCanvas();
+function spawnParticles(color,count=80){const cx=innerWidth2,cy=innerHeight2;for(let i=0;icount;i++){particles.push({xcx,ycy,vx(Math.random()-.5)16,vy(Math.random()-.5)16-5,life1,decay.008+Math.random().015,size3+Math.random()5,color})}}
+const MAX_PARTICLES=400;
+(function anim(){
+ if(particles.length){canvasDirty=true;ctx.clearRect(0,0,innerWidth,innerHeight);ctx.shadowBlur=10;const len=Math.min(particles.length,MAX_PARTICLES);for(let i=0;ilen;i++){const p=particles[i];p.x+=p.vx;p.y+=p.vy;p.vy+=0.2;p.life-=p.decay;if(p.life=0)continue;ctx.globalAlpha=p.life;ctx.fillStyle=p.color;ctx.shadowColor=p.color;ctx.beginPath();ctx.arc(p.x,p.y,Math.max(p.sizep.life,0.5),0,Math.PI2);ctx.fill()}let w=0;for(let i=0;iparticles.length;i++){if(particles[i].life0)particles[w++]=particles[i]}particles.length=w;ctx.globalAlpha=1;ctx.shadowBlur=0}
+ else if(canvasDirty){ctx.clearRect(0,0,innerWidth,innerHeight);canvasDirty=false}
+ requestAnimationFrame(anim);
+})();
+const loaded=Save.load();
+if(loaded){
+ Save.apply(loaded);
+ const ago=Math.floor((Date.now()-(loaded.tsDate.now()))1000);
+ let agoText=ago60'только что'ago3600Math.floor(ago60)+' мин назад'ago86400Math.floor(ago3600)+' ч назад'Math.floor(ago86400)+' дн назад';
+ showToast('💾 Прогресс восстановлен ('+agoText+')');
+}
+applyCase();
+generateDailyQuests();
+drawWheel();
+updateWheelTimer();
+setTimeout(()={randomActivity();scheduleActivity()},3000);
+setTimeout(()={
+ const today=getDayNumber();
+ if(today!==lastDailyDay){
+  $('dailyStreakModal').textContent=dailyStreak+(lastDailyDay===today-111);
+  const rewards=getDailyRewards();
+  const nextStreak=lastDailyDay===today-1dailyStreak+11;
+  const reward=rewards[(nextStreak-1)%7]getIncomeMult();
+  $('dailyRewardModal').textContent=fmt(reward);
+  $('dailyOverlay').classList.add('active');
+ }
+},1500);
+script
+body
+html
